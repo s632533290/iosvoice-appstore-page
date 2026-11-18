@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>录音转写编辑器</title>
-  <meta name="description" content="录音转写编辑器 support, marketing, and privacy page.">
+  <meta name="description" content="离线转写，按文字剪音频。面向录音整理、会议复盘、访谈剪辑和创作素材处理。">
   <style>
     :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #faf7f2; color: #161616; }
     body { margin: 0; }
@@ -16,9 +16,11 @@
     h1 { font-size: clamp(42px, 8vw, 76px); line-height: .95; margin: 0; letter-spacing: 0; }
     .tagline { max-width: 760px; font-size: clamp(19px, 3vw, 30px); line-height: 1.25; color: #4f4f4f; margin: 18px 0 0; }
     nav, .lang, .contact { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
-    a, button { color: #141414; }
-    nav a, .lang button, .contact span { border: 1px solid #ddd4c8; background: #fff; border-radius: 8px; padding: 10px 13px; text-decoration: none; font-size: 15px; }
-    .lang button { cursor: pointer; }
+    a, select { color: #141414; }
+    nav a, .lang select, .contact span { border: 1px solid #ddd4c8; background: #fff; border-radius: 8px; padding: 10px 13px; text-decoration: none; font-size: 15px; }
+    .lang { align-items: center; }
+    .lang select { cursor: pointer; }
+    section { scroll-margin-top: 12px; }
     section { padding: 48px 0; border-bottom: 1px solid #ece4d8; }
     h2 { font-size: 30px; margin: 0 0 16px; }
     p, li { font-size: 18px; line-height: 1.65; }
@@ -28,44 +30,469 @@
 </head>
 <body>
   <header id="marketing"><div class="wrap hero"><div>
-    <div class="brand"><img class="icon" src="assets/app-icon.png" alt="App icon"><h1 id="title">录音转写编辑器</h1></div>
-    <p class="tagline" id="tagline"></p>
-    <nav><a href="#features" id="navFeatures"></a><a href="#privacy" id="navPrivacy"></a><a href="#support" id="navSupport"></a></nav>
-    <div class="lang" aria-label="Language"><button type="button" data-set-lang="zh-Hans">录音转写编辑器</button><button type="button" data-set-lang="zh-Hant">錄音轉寫編輯器</button><button type="button" data-set-lang="en-US">Audio Transcription Editor</button><button type="button" data-set-lang="en-GB">Audio Transcription Editor</button><button type="button" data-set-lang="en-CA">Audio Transcription Editor</button><button type="button" data-set-lang="en-AU">Audio Transcription Editor</button><button type="button" data-set-lang="ja">録音文字起こしエディタ</button><button type="button" data-set-lang="ko">녹음 전사 편집기</button><button type="button" data-set-lang="de-DE">Audio-Transkriptionseditor</button><button type="button" data-set-lang="fr-FR">Éditeur transcription audio</button><button type="button" data-set-lang="es-ES">Editor de transcripción audio</button><button type="button" data-set-lang="es-MX">Editor de transcripción audio</button><button type="button" data-set-lang="pt-BR">Editor de transcrição áudio</button><button type="button" data-set-lang="ru">Редактор транскрипции аудио</button><button type="button" data-set-lang="it">Editor trascrizione audio</button><button type="button" data-set-lang="nl-NL">Audio Transcriptie Editor</button><button type="button" data-set-lang="tr">Ses Transkripsiyon Editörü</button></div>
+    <div class="brand"><img class="icon" src="assets/app-icon.png" alt=""><h1 id="title">录音转写编辑器</h1></div>
+    <p class="tagline" id="tagline">离线转写，按文字剪音频。面向录音整理、会议复盘、访谈剪辑和创作素材处理。</p>
+    <nav><a href="#features" id="navFeatures">核心功能</a><a href="#privacy" id="navPrivacy">隐私政策</a><a href="#support" id="navSupport">技术支持</a></nav>
+    <div class="lang"><label for="locale" id="languageLabel">语言</label>
+      <select id="locale">
+        <option lang="zh-Hans" value="zh-Hans">简体中文</option>
+        <option lang="zh-Hant" value="zh-Hant">繁體中文</option>
+        <option lang="en-US" value="en-US">English (US)</option>
+        <option lang="en-GB" value="en-GB">English (UK)</option>
+        <option lang="en-CA" value="en-CA">English (Canada)</option>
+        <option lang="en-AU" value="en-AU">English (Australia)</option>
+        <option lang="ja" value="ja">日本語</option>
+        <option lang="ko" value="ko">한국어</option>
+        <option lang="de-DE" value="de-DE">Deutsch</option>
+        <option lang="fr-FR" value="fr-FR">Français (France)</option>
+        <option lang="fr-CA" value="fr-CA">Français (Canada)</option>
+        <option lang="es-ES" value="es-ES">Español (España)</option>
+        <option lang="es-MX" value="es-MX">Español (México)</option>
+        <option lang="pt-BR" value="pt-BR">Português (Brasil)</option>
+        <option lang="ru" value="ru">Русский</option>
+        <option lang="it" value="it">Italiano</option>
+        <option lang="nl-NL" value="nl-NL">Nederlands</option>
+        <option lang="tr" value="tr">Türkçe</option>
+      </select>
+    </div>
   </div></div></header>
   <main class="wrap">
-    <section id="features"><h2 id="featuresTitle"></h2><p id="intro"></p><ul id="featureItems"></ul></section>
-    <section id="privacy"><h2 id="privacyTitle"></h2><p id="privacyText"></p><p><span id="termsLabel"></span>: <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Apple Standard EULA</a></p></section>
-    <section id="support"><h2 id="supportTitle"></h2><p id="supportText"></p><div class="contact"><span>Email: <a href="mailto:s632533290@gmail.com">s632533290@gmail.com</a></span><span>小红书：楚游尘</span><span>少数派：楚游尘</span></div></section>
+    <section id="features"><h2 id="featuresTitle">核心功能</h2><p id="intro">录音转写编辑器支持录音、从“文件”导入音频，以及通过系统分享扩展保存语音备忘录。转写、说话人分离和项目编辑默认在设备本地完成。</p><ul id="featureItems"><li>离线高精度转写：内置高精度转写模型，安装后即可处理常见录音场景。</li><li>说话人分离：自动整理不同说话人，适合会议、访谈和播客素材。</li><li>按文字编辑音频：围绕转写文本定位音频片段，原始文件保持不变。</li><li>从文字稿整理会议纪要和待办，或针对所选录音提问。</li><li>专业导出：整理文字稿、字幕和剪辑后的音频素材。</li></ul></section>
+    <section id="privacy"><h2 id="privacyTitle">隐私政策</h2><p id="privacyText">默认在本机保存录音、文字稿和剪辑项目，可在录音库删除录音。无需注册，App 不使用广告追踪。麦克风用于录音，相机用于拍摄封面。购买与订阅由 Apple 处理。</p><p id="externalText">使用外部转写时，确认上传后，你选择的服务商会收到完整录音。选择阿里云百炼时，音频会先传至其临时存储，有效期为 48 小时。使用外部 AI 生成纪要、摘要、事项、翻译或回答问题时，所选接口会收到相关文字，包括任务需要的文字稿片段、问题或近期对话。</p><p id="retentionText">接口凭据保存在本机钥匙串中，用于向所选服务验证身份。切回本机处理即可停止后续传送。服务商收到的数据按其隐私政策保留和删除，如需删除已上传内容，请联系该服务商。</p><p><span id="termsLabel">使用条款</span>: <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Apple Standard EULA</a></p></section>
+    <section id="support"><h2 id="supportTitle">技术支持</h2><p id="supportText">如果遇到导入、录音、转写、购买或导出问题，请附上设备型号、系统版本、App 版本和复现步骤。</p><div class="contact"><span><a href="mailto:onenfiction@gmail.com">onenfiction@gmail.com</a></span><span>小红书：楚游尘</span><span>少数派：楚游尘</span></div></section>
   </main>
   <footer class="wrap"><span id="footerText"></span></footer>
   <script>
-    const translations = {"zh-Hans":{"title":"录音转写编辑器","tagline":"离线转写，按文字剪音频。面向录音整理、会议复盘、访谈剪辑和创作素材处理。","features":"核心功能","privacy":"隐私政策","support":"技术支持","intro":"录音转写编辑器支持录音、从“文件”导入音频，以及通过系统分享扩展保存语音备忘录。转写、说话人分离和项目编辑默认在设备本地完成。","featureItems":["离线高精度转写：内置高精度转写模型，安装后即可处理常见录音场景。","说话人分离：自动整理不同说话人，适合会议、访谈和播客素材。","按文字编辑音频：围绕转写文本定位音频片段，原始文件保持不变。","专业导出：整理文字稿、字幕和剪辑后的音频素材。"],"privacyText":"录音转写编辑器不需要账号，不使用广告追踪，不主动收集个人数据。录音、导入文件、转写文本和编辑项目默认保存在你的设备本地。麦克风权限用于录音，语音识别权限用于系统转写能力，相机权限仅用于拍摄封面。购买和订阅由 Apple 处理。","supportText":"如果遇到导入、录音、转写、购买或导出问题，请附上设备型号、系统版本、App 版本和复现步骤。","terms":"使用条款"},"zh-Hant":{"title":"錄音轉寫編輯器","tagline":"離線轉寫，按文字剪音訊。面向錄音整理、會議回顧、訪談剪輯和創作素材處理。","features":"核心功能","privacy":"隱私政策","support":"技術支援","intro":"錄音轉寫編輯器支援錄音、從「檔案」匯入音訊，以及透過系統分享擴充功能保存語音備忘錄。轉寫、說話人分離和專案編輯預設在裝置本地完成。","featureItems":["離線高精度轉寫：內建高精度轉寫模型，安裝後即可處理常見錄音場景。","說話人分離：自動整理不同說話人，適合會議、訪談和播客素材。","按文字編輯音訊：圍繞轉寫文字定位音訊片段，原始檔案保持不變。","專業匯出：整理文字稿、字幕和剪輯後的音訊素材。"],"privacyText":"錄音轉寫編輯器不需要帳號，不使用廣告追蹤，不主動收集個人資料。錄音、匯入檔案、轉寫文字和編輯專案預設保存在你的裝置本地。麥克風權限用於錄音，語音辨識權限用於系統轉寫能力，相機權限僅用於拍攝封面。購買和訂閱由 Apple 處理。","supportText":"如果遇到匯入、錄音、轉寫、購買或匯出問題，請附上裝置型號、系統版本、App 版本和重現步驟。","terms":"使用條款"},"en-US":{"title":"Audio Transcription Editor","tagline":"Offline transcription and text-based audio editing for recordings, meetings, interviews, and creative workflows.","features":"Core Features","privacy":"Privacy Policy","support":"Support","intro":"Audio Transcription Editor records audio, imports files, and receives Voice Memos through the iOS share extension. Transcription, speaker separation, and editing are handled on device by default.","featureItems":["Offline transcription: built-in high-accuracy model for common recording workflows.","Speaker separation: organize speaker turns for meetings, interviews, and podcasts.","Text-based editing: navigate audio from transcript text while preserving originals.","Professional export: prepare transcripts, captions, and edited audio assets."],"privacyText":"Audio Transcription Editor does not require an account, does not use advertising tracking, and does not actively collect personal data. Recordings, imported files, transcripts, and projects are stored on your device by default. Microphone access is used for recording, speech recognition access is used for system transcription, and camera access is only used for cover images. Purchases and subscriptions are processed by Apple.","supportText":"For import, recording, transcription, purchase, or export issues, include your device model, system version, app version, and reproduction steps.","terms":"Terms of Use"},"en-GB":{"title":"Audio Transcription Editor","tagline":"Offline transcription and text-based audio editing for recordings, meetings, interviews, and creative workflows.","features":"Core Features","privacy":"Privacy Policy","support":"Support","intro":"Audio Transcription Editor records audio, imports files, and receives Voice Memos through the iOS share extension. Transcription, speaker separation, and editing are handled on device by default.","featureItems":["Offline transcription: built-in high-accuracy model for common recording workflows.","Speaker separation: organize speaker turns for meetings, interviews, and podcasts.","Text-based editing: navigate audio from transcript text while preserving originals.","Professional export: prepare transcripts, captions, and edited audio assets."],"privacyText":"Audio Transcription Editor does not require an account, does not use advertising tracking, and does not actively collect personal data. Recordings, imported files, transcripts, and projects are stored on your device by default. Microphone access is used for recording, speech recognition access is used for system transcription, and camera access is only used for cover images. Purchases and subscriptions are processed by Apple.","supportText":"For import, recording, transcription, purchase, or export issues, include your device model, system version, app version, and reproduction steps.","terms":"Terms of Use"},"en-CA":{"title":"Audio Transcription Editor","tagline":"Offline transcription and text-based audio editing for recordings, meetings, interviews, and creative workflows.","features":"Core Features","privacy":"Privacy Policy","support":"Support","intro":"Audio Transcription Editor records audio, imports files, and receives Voice Memos through the iOS share extension. Transcription, speaker separation, and editing are handled on device by default.","featureItems":["Offline transcription: built-in high-accuracy model for common recording workflows.","Speaker separation: organize speaker turns for meetings, interviews, and podcasts.","Text-based editing: navigate audio from transcript text while preserving originals.","Professional export: prepare transcripts, captions, and edited audio assets."],"privacyText":"Audio Transcription Editor does not require an account, does not use advertising tracking, and does not actively collect personal data. Recordings, imported files, transcripts, and projects are stored on your device by default. Microphone access is used for recording, speech recognition access is used for system transcription, and camera access is only used for cover images. Purchases and subscriptions are processed by Apple.","supportText":"For import, recording, transcription, purchase, or export issues, include your device model, system version, app version, and reproduction steps.","terms":"Terms of Use"},"en-AU":{"title":"Audio Transcription Editor","tagline":"Offline transcription and text-based audio editing for recordings, meetings, interviews, and creative workflows.","features":"Core Features","privacy":"Privacy Policy","support":"Support","intro":"Audio Transcription Editor records audio, imports files, and receives Voice Memos through the iOS share extension. Transcription, speaker separation, and editing are handled on device by default.","featureItems":["Offline transcription: built-in high-accuracy model for common recording workflows.","Speaker separation: organize speaker turns for meetings, interviews, and podcasts.","Text-based editing: navigate audio from transcript text while preserving originals.","Professional export: prepare transcripts, captions, and edited audio assets."],"privacyText":"Audio Transcription Editor does not require an account, does not use advertising tracking, and does not actively collect personal data. Recordings, imported files, transcripts, and projects are stored on your device by default. Microphone access is used for recording, speech recognition access is used for system transcription, and camera access is only used for cover images. Purchases and subscriptions are processed by Apple.","supportText":"For import, recording, transcription, purchase, or export issues, include your device model, system version, app version, and reproduction steps.","terms":"Terms of Use"},"ja":{"title":"録音文字起こしエディタ","tagline":"録音、会議、インタビュー向けのオフライン文字起こしとテキストベース音声編集。","features":"主な機能","privacy":"プライバシーポリシー","support":"サポート","intro":"録音文字起こしエディタは、録音、ファイル読み込み、共有拡張からの保存に対応し、文字起こし、話者分離、編集を端末上で行います。","featureItems":["オフライン文字起こし：内蔵モデルで一般的な録音を処理。","話者分離：会議、インタビュー、ポッドキャストを整理。","テキストベース編集：文字起こしから音声位置を確認。","書き出し：原稿、字幕、編集済み音声を作成。"],"privacyText":"アカウント不要で、個人データの能動的な収集や広告トラッキングを行いません。録音、読み込みファイル、文字起こし、プロジェクトは既定で端末に保存されます。購入とサブスクリプションは Apple が処理します。","supportText":"問題がある場合は、端末モデル、システムバージョン、Appバージョン、再現手順を添えて連絡してください。","terms":"利用規約"},"ko":{"title":"녹음 전사 편집기","tagline":"녹음, 회의, 인터뷰를 위한 오프라인 전사와 텍스트 기반 오디오 편집.","features":"주요 기능","privacy":"개인정보 처리방침","support":"지원","intro":"녹음 전사 편집기는 녹음, 파일 가져오기, 공유 확장 저장을 지원하며 전사, 화자 분리, 편집을 기기에서 처리합니다.","featureItems":["오프라인 전사: 내장 모델로 일반 녹음을 처리합니다.","화자 분리: 회의, 인터뷰, 팟캐스트를 정리합니다.","텍스트 기반 편집: 전사 텍스트로 오디오를 찾습니다.","내보내기: 원고, 자막, 편집 오디오를 준비합니다."],"privacyText":"계정이 필요 없고 개인 데이터를 능동적으로 수집하지 않으며 광고 추적을 사용하지 않습니다. 녹음, 가져온 파일, 전사, 프로젝트는 기본적으로 기기에 저장됩니다. 구매와 구독은 Apple이 처리합니다.","supportText":"문제가 있으면 기기 모델, 시스템 버전, 앱 버전, 재현 단계를 보내 주세요.","terms":"이용 약관"},"de-DE":{"title":"Audio-Transkriptionseditor","tagline":"Offline-Transkription und textbasierte Audiobearbeitung für Aufnahmen, Meetings und Interviews.","features":"Funktionen","privacy":"Datenschutz","support":"Support","intro":"Audio-Transkriptionseditor nimmt auf, importiert Dateien und verarbeitet Sprachmemos lokal auf dem Gerät.","featureItems":["Offline-Transkription mit integriertem Modell.","Sprechertrennung für Meetings, Interviews und Podcasts.","Textbasierte Bearbeitung über den Transkripttext.","Export für Transkripte, Untertitel und Audiodateien."],"privacyText":"Kein Konto, kein Werbe-Tracking und keine aktive Sammlung personenbezogener Daten. Aufnahmen, Dateien, Transkripte und Projekte bleiben standardmäßig auf dem Gerät. Käufe und Abos werden von Apple verarbeitet.","supportText":"Bitte sende Gerätemodell, Systemversion, App-Version und Reproduktionsschritte.","terms":"Nutzungsbedingungen"},"fr-FR":{"title":"Éditeur transcription audio","tagline":"Transcription hors ligne et édition audio par le texte pour enregistrements, réunions et interviews.","features":"Fonctions","privacy":"Confidentialité","support":"Assistance","intro":"Éditeur transcription audio enregistre, importe des fichiers et traite mémos vocaux, transcriptions et éditions sur l’appareil.","featureItems":["Transcription hors ligne avec modèle intégré.","Séparation des interlocuteurs pour réunions et interviews.","Édition audio depuis le texte transcrit.","Export de transcriptions, sous-titres et audio édité."],"privacyText":"Aucun compte requis, pas de suivi publicitaire ni collecte active de données personnelles. Les fichiers et projets restent par défaut sur l’appareil. Les achats sont traités par Apple.","supportText":"Incluez le modèle de l’appareil, la version du système, la version de l’app et les étapes de reproduction.","terms":"Conditions d’utilisation"},"es-ES":{"title":"Editor de transcripción audio","tagline":"Transcripción sin conexión y edición de audio por texto para grabaciones, reuniones e entrevistas.","features":"Funciones","privacy":"Privacidad","support":"Soporte","intro":"Editor de transcripción audio graba, importa archivos y procesa notas de voz, transcripciones y ediciones en el dispositivo.","featureItems":["Transcripción sin conexión con modelo integrado.","Separación de hablantes para reuniones e entrevistas.","Edición de audio desde el texto transcrito.","Exportación de transcripciones, subtítulos y audio editado."],"privacyText":"No requiere cuenta, no usa seguimiento publicitario ni recopila datos personales de forma activa. Los archivos y proyectos se guardan por defecto en el dispositivo. Apple procesa compras y suscripciones.","supportText":"Incluye modelo del dispositivo, versión del sistema, versión de la app y pasos para reproducir el problema.","terms":"Términos de uso"},"es-MX":{"title":"Editor de transcripción audio","tagline":"Transcripción sin conexión y edición de audio por texto para grabaciones, reuniones e entrevistas.","features":"Funciones","privacy":"Privacidad","support":"Soporte","intro":"Editor de transcripción audio graba, importa archivos y procesa notas de voz, transcripciones y ediciones en el dispositivo.","featureItems":["Transcripción sin conexión con modelo integrado.","Separación de hablantes para reuniones e entrevistas.","Edición de audio desde el texto transcrito.","Exportación de transcripciones, subtítulos y audio editado."],"privacyText":"No requiere cuenta, no usa seguimiento publicitario ni recopila datos personales de forma activa. Los archivos y proyectos se guardan por defecto en el dispositivo. Apple procesa compras y suscripciones.","supportText":"Incluye modelo del dispositivo, versión del sistema, versión de la app y pasos para reproducir el problema.","terms":"Términos de uso"},"pt-BR":{"title":"Editor de transcrição áudio","tagline":"Transcrição offline e edição de áudio por texto para gravações, reuniões e entrevistas.","features":"Recursos","privacy":"Privacidade","support":"Suporte","intro":"Editor de transcrição áudio grava, importa arquivos e processa memorandos de voz, transcrições e edições no dispositivo.","featureItems":["Transcrição offline com modelo integrado.","Separação de falantes para reuniões e entrevistas.","Edição de áudio pelo texto transcrito.","Exportação de transcrições, legendas e áudio editado."],"privacyText":"Não exige conta, não usa rastreamento publicitário nem coleta dados pessoais ativamente. Arquivos e projetos ficam por padrão no dispositivo. Compras e assinaturas são processadas pela Apple.","supportText":"Inclua modelo do dispositivo, versão do sistema, versão do app e passos de reprodução.","terms":"Termos de Uso"},"ru":{"title":"Редактор транскрипции аудио","tagline":"Офлайн-транскрипция и редактирование аудио по тексту для записей, встреч и интервью.","features":"Возможности","privacy":"Конфиденциальность","support":"Поддержка","intro":"Редактор транскрипции аудио записывает, импортирует файлы и обрабатывает голосовые заметки, расшифровки и правки на устройстве.","featureItems":["Офлайн-транскрипция со встроенной моделью.","Разделение говорящих для встреч и интервью.","Редактирование аудио по тексту.","Экспорт текстов, субтитров и аудио."],"privacyText":"Учетная запись не требуется, рекламное отслеживание не используется, персональные данные активно не собираются. Файлы и проекты по умолчанию остаются на устройстве. Покупки обрабатываются Apple.","supportText":"Укажите модель устройства, версию системы, версию приложения и шаги воспроизведения.","terms":"Условия использования"},"it":{"title":"Editor trascrizione audio","tagline":"Trascrizione offline e modifica audio dal testo per registrazioni, riunioni e interviste.","features":"Funzioni","privacy":"Privacy","support":"Supporto","intro":"Editor trascrizione audio registra, importa file e gestisce memo vocali, trascrizioni e modifiche sul dispositivo.","featureItems":["Trascrizione offline con modello integrato.","Separazione dei parlanti per riunioni e interviste.","Modifica audio dal testo trascritto.","Esportazione di trascrizioni, sottotitoli e audio."],"privacyText":"Non richiede account, non usa tracciamento pubblicitario e non raccoglie attivamente dati personali. File e progetti restano per impostazione predefinita sul dispositivo. Acquisti e abbonamenti sono gestiti da Apple.","supportText":"Invia modello del dispositivo, versione del sistema, versione dell’app e passaggi per riprodurre il problema.","terms":"Termini di utilizzo"},"nl-NL":{"title":"Audio Transcriptie Editor","tagline":"Offline transcriptie en audio bewerken via tekst voor opnamen, vergaderingen en interviews.","features":"Functies","privacy":"Privacybeleid","support":"Support","intro":"Audio Transcriptie Editor neemt op, importeert bestanden en verwerkt spraakmemo’s, transcripties en bewerkingen lokaal op het apparaat.","featureItems":["Offline transcriptie met ingebouwd model.","Sprekers scheiden voor vergaderingen en interviews.","Audio bewerken via transcriptietekst.","Export van transcripties, ondertitels en audio."],"privacyText":"Geen account nodig, geen advertentietracking en geen actieve verzameling van persoonsgegevens. Bestanden en projecten blijven standaard op het apparaat. Aankopen en abonnementen worden door Apple verwerkt.","supportText":"Stuur apparaattype, systeemversie, appversie en stappen om het probleem te reproduceren.","terms":"Gebruiksvoorwaarden"},"tr":{"title":"Ses Transkripsiyon Editörü","tagline":"Kayıtlar, toplantılar ve röportajlar için çevrimdışı transkripsiyon ve metne göre ses düzenleme.","features":"Özellikler","privacy":"Gizlilik Politikası","support":"Destek","intro":"Ses Transkripsiyon Editörü kayıt yapar, dosya aktarır ve sesli notları, transkripsiyonları ve düzenlemeleri cihazda işler.","featureItems":["Yerleşik modelle çevrimdışı transkripsiyon.","Toplantı ve röportajlar için konuşmacı ayırma.","Metin üzerinden ses düzenleme.","Transkripsiyon, altyazı ve ses dışa aktarma."],"privacyText":"Hesap gerektirmez, reklam takibi kullanmaz ve kişisel verileri aktif olarak toplamaz. Dosyalar ve projeler varsayılan olarak cihazda kalır. Satın almalar Apple tarafından işlenir.","supportText":"Cihaz modeli, sistem sürümü, app sürümü ve yeniden üretme adımlarını gönderin.","terms":"Kullanım Şartları"}};
-    const params = new URLSearchParams(window.location.search);
-    const requested = params.get('lang') || 'zh-Hans';
-    function pick(lang) { return translations[lang] || translations[lang.split('-')[0]] || translations['zh-Hans']; }
-    function setLang(lang) {
-      const t = pick(lang);
-      document.documentElement.lang = lang;
-      document.title = t.title;
-      title.textContent = t.title;
-      tagline.textContent = t.tagline;
-      navFeatures.textContent = t.features;
-      navPrivacy.textContent = t.privacy;
-      navSupport.textContent = t.support;
-      featuresTitle.textContent = t.features;
-      privacyTitle.textContent = t.privacy;
-      supportTitle.textContent = t.support;
-      intro.textContent = t.intro;
-      privacyText.textContent = t.privacyText;
-      supportText.textContent = t.supportText;
-      termsLabel.textContent = t.terms;
-      footerText.textContent = '© 2026 Minggang Jiang. ' + t.title + '.';
-      featureItems.innerHTML = '';
-      t.featureItems.forEach(item => { const li = document.createElement('li'); li.textContent = item; featureItems.appendChild(li); });
+    const translations = {
+  "zh-Hans": {
+    "title": "录音转写编辑器",
+    "tagline": "离线转写，按文字剪音频。面向录音整理、会议复盘、访谈剪辑和创作素材处理。",
+    "features": "核心功能",
+    "privacy": "隐私政策",
+    "support": "技术支持",
+    "intro": "录音转写编辑器支持录音、从“文件”导入音频，以及通过系统分享扩展保存语音备忘录。转写、说话人分离和项目编辑默认在设备本地完成。",
+    "featureItems": [
+      "离线高精度转写：内置高精度转写模型，安装后即可处理常见录音场景。",
+      "说话人分离：自动整理不同说话人，适合会议、访谈和播客素材。",
+      "按文字编辑音频：围绕转写文本定位音频片段，原始文件保持不变。",
+      "从文字稿整理会议纪要和待办，或针对所选录音提问。",
+      "专业导出：整理文字稿、字幕和剪辑后的音频素材。"
+    ],
+    "privacyText": "默认在本机保存录音、文字稿和剪辑项目，可在录音库删除录音。无需注册，App 不使用广告追踪。麦克风用于录音，相机用于拍摄封面。购买与订阅由 Apple 处理。",
+    "supportText": "如果遇到导入、录音、转写、购买或导出问题，请附上设备型号、系统版本、App 版本和复现步骤。",
+    "terms": "使用条款",
+    "language": "语言",
+    "externalText": "使用外部转写时，确认上传后，你选择的服务商会收到完整录音。选择阿里云百炼时，音频会先传至其临时存储，有效期为 48 小时。使用外部 AI 生成纪要、摘要、事项、翻译或回答问题时，所选接口会收到相关文字，包括任务需要的文字稿片段、问题或近期对话。",
+    "retentionText": "接口凭据保存在本机钥匙串中，用于向所选服务验证身份。切回本机处理即可停止后续传送。服务商收到的数据按其隐私政策保留和删除，如需删除已上传内容，请联系该服务商。"
+  },
+  "zh-Hant": {
+    "title": "錄音轉寫編輯器",
+    "tagline": "離線轉寫，按文字剪音訊。面向錄音整理、會議回顧、訪談剪輯和創作素材處理。",
+    "features": "核心功能",
+    "privacy": "隱私政策",
+    "support": "技術支援",
+    "intro": "錄音轉寫編輯器支援錄音、從「檔案」匯入音訊，以及透過系統分享擴充功能保存語音備忘錄。轉寫、說話人分離和專案編輯預設在裝置本地完成。",
+    "featureItems": [
+      "離線高精度轉寫：內建高精度轉寫模型，安裝後即可處理常見錄音場景。",
+      "說話人分離：自動整理不同說話人，適合會議、訪談和播客素材。",
+      "按文字編輯音訊：圍繞轉寫文字定位音訊片段，原始檔案保持不變。",
+      "從逐字稿整理會議紀錄和待辦事項，或針對選取的錄音提問。",
+      "專業匯出：整理文字稿、字幕和剪輯後的音訊素材。"
+    ],
+    "privacyText": "錄音、逐字稿及剪輯專案預設儲存在裝置上，你可從錄音資料庫刪除錄音。使用 App 無須註冊，也不會進行廣告追蹤。麥克風用於錄音，相機用於拍攝封面。購買與訂閱由 Apple 處理。",
+    "supportText": "如果遇到匯入、錄音、轉寫、購買或匯出問題，請附上裝置型號、系統版本、App 版本和重現步驟。",
+    "terms": "使用條款",
+    "language": "語言",
+    "externalText": "使用外部轉寫時，確認上傳後，你選擇的服務商會收到完整錄音。選用阿里雲百煉時，音訊會先上傳至其暫存空間，有效期限為 48 小時。使用外部 AI 產生會議紀錄、摘要、待辦、翻譯或回答問題時，所選服務會收到所需文字，包括逐字稿節錄、問題或近期對話。",
+    "retentionText": "服務憑證儲存在裝置的鑰匙圈中，用於向所選服務驗證身分。改用裝置端處理即可停止後續傳送。服務商會依其隱私權政策保留及刪除收到的資料。如需刪除已上傳的內容，請聯絡該服務商。"
+  },
+  "en-US": {
+    "title": "Audio Transcription Editor",
+    "tagline": "Offline transcription and text-based audio editing for recordings, meetings, interviews, and creative workflows.",
+    "features": "Core Features",
+    "privacy": "Privacy Policy",
+    "support": "Support",
+    "intro": "Audio Transcription Editor records audio, imports files, and receives Voice Memos through the iOS share extension. Transcription, speaker separation, and editing are handled on device by default.",
+    "featureItems": [
+      "Offline transcription: built-in high-accuracy model for common recording workflows.",
+      "Speaker separation: organize speaker turns for meetings, interviews, and podcasts.",
+      "Text-based editing: navigate audio from transcript text while preserving originals.",
+      "Turn transcripts into meeting minutes and action items, or ask a question about selected recordings.",
+      "Professional export: prepare transcripts, captions, and edited audio assets."
+    ],
+    "privacyText": "Recordings, transcripts and edits are stored on your device by default. You can delete recordings from your library. No account is required. The app does not track you for advertising. The microphone records sound, and the camera takes cover photos. Apple processes purchases and subscriptions.",
+    "supportText": "For import, recording, transcription, purchase, or export issues, include your device model, system version, app version, and reproduction steps.",
+    "terms": "Terms of Use",
+    "language": "Language",
+    "externalText": "If you confirm external transcription, the provider you choose receives the full recording. Alibaba Cloud Model Studio first places the audio in temporary storage valid for 48 hours. When you use an external AI service for minutes, summaries, action items, translation or questions, it receives the text needed for that task, which can include transcript excerpts, your question or recent chat messages.",
+    "retentionText": "API credentials are stored in the device Keychain and used to authenticate with your chosen service. Switch to on-device processing to stop future transfers. Each provider applies its own retention and deletion policy. Contact that provider to request deletion of material already sent."
+  },
+  "en-GB": {
+    "title": "Audio Transcription Editor",
+    "tagline": "Offline transcription and text-based audio editing for recordings, meetings, interviews, and creative workflows.",
+    "features": "Core Features",
+    "privacy": "Privacy Policy",
+    "support": "Support",
+    "intro": "Audio Transcription Editor records audio, imports files, and receives Voice Memos through the iOS share extension. Transcription, speaker separation, and editing are handled on device by default.",
+    "featureItems": [
+      "Offline transcription: built-in high-accuracy model for common recording workflows.",
+      "Speaker separation: organize speaker turns for meetings, interviews, and podcasts.",
+      "Text-based editing: navigate audio from transcript text while preserving originals.",
+      "Turn transcripts into meeting minutes and action items, or ask a question about selected recordings.",
+      "Professional export: prepare transcripts, captions, and edited audio assets."
+    ],
+    "privacyText": "Recordings, transcripts and edits are stored on your device by default. You can delete recordings from your library. No account is required. The app does not track you for advertising. The microphone records sound, and the camera takes cover photos. Apple processes purchases and subscriptions.",
+    "supportText": "For import, recording, transcription, purchase, or export issues, include your device model, system version, app version, and reproduction steps.",
+    "terms": "Terms of Use",
+    "language": "Language",
+    "externalText": "If you confirm external transcription, the provider you choose receives the full recording. Alibaba Cloud Model Studio first places the audio in temporary storage valid for 48 hours. When you use an external AI service for minutes, summaries, action items, translation or questions, it receives the text needed for that task, which can include transcript excerpts, your question or recent chat messages.",
+    "retentionText": "API credentials are stored in the device Keychain and used to authenticate with your chosen service. Switch to on-device processing to stop future transfers. Each provider applies its own retention and deletion policy. Contact that provider to request deletion of material already sent."
+  },
+  "en-CA": {
+    "title": "Audio Transcription Editor",
+    "tagline": "Offline transcription and text-based audio editing for recordings, meetings, interviews, and creative workflows.",
+    "features": "Core Features",
+    "privacy": "Privacy Policy",
+    "support": "Support",
+    "intro": "Audio Transcription Editor records audio, imports files, and receives Voice Memos through the iOS share extension. Transcription, speaker separation, and editing are handled on device by default.",
+    "featureItems": [
+      "Offline transcription: built-in high-accuracy model for common recording workflows.",
+      "Speaker separation: organize speaker turns for meetings, interviews, and podcasts.",
+      "Text-based editing: navigate audio from transcript text while preserving originals.",
+      "Turn transcripts into meeting minutes and action items, or ask a question about selected recordings.",
+      "Professional export: prepare transcripts, captions, and edited audio assets."
+    ],
+    "privacyText": "Recordings, transcripts and edits are stored on your device by default. You can delete recordings from your library. No account is required. The app does not track you for advertising. The microphone records sound, and the camera takes cover photos. Apple processes purchases and subscriptions.",
+    "supportText": "For import, recording, transcription, purchase, or export issues, include your device model, system version, app version, and reproduction steps.",
+    "terms": "Terms of Use",
+    "language": "Language",
+    "externalText": "If you confirm external transcription, the provider you choose receives the full recording. Alibaba Cloud Model Studio first places the audio in temporary storage valid for 48 hours. When you use an external AI service for minutes, summaries, action items, translation or questions, it receives the text needed for that task, which can include transcript excerpts, your question or recent chat messages.",
+    "retentionText": "API credentials are stored in the device Keychain and used to authenticate with your chosen service. Switch to on-device processing to stop future transfers. Each provider applies its own retention and deletion policy. Contact that provider to request deletion of material already sent."
+  },
+  "en-AU": {
+    "title": "Audio Transcription Editor",
+    "tagline": "Offline transcription and text-based audio editing for recordings, meetings, interviews, and creative workflows.",
+    "features": "Core Features",
+    "privacy": "Privacy Policy",
+    "support": "Support",
+    "intro": "Audio Transcription Editor records audio, imports files, and receives Voice Memos through the iOS share extension. Transcription, speaker separation, and editing are handled on device by default.",
+    "featureItems": [
+      "Offline transcription: built-in high-accuracy model for common recording workflows.",
+      "Speaker separation: organize speaker turns for meetings, interviews, and podcasts.",
+      "Text-based editing: navigate audio from transcript text while preserving originals.",
+      "Turn transcripts into meeting minutes and action items, or ask a question about selected recordings.",
+      "Professional export: prepare transcripts, captions, and edited audio assets."
+    ],
+    "privacyText": "Recordings, transcripts and edits are stored on your device by default. You can delete recordings from your library. No account is required. The app does not track you for advertising. The microphone records sound, and the camera takes cover photos. Apple processes purchases and subscriptions.",
+    "supportText": "For import, recording, transcription, purchase, or export issues, include your device model, system version, app version, and reproduction steps.",
+    "terms": "Terms of Use",
+    "language": "Language",
+    "externalText": "If you confirm external transcription, the provider you choose receives the full recording. Alibaba Cloud Model Studio first places the audio in temporary storage valid for 48 hours. When you use an external AI service for minutes, summaries, action items, translation or questions, it receives the text needed for that task, which can include transcript excerpts, your question or recent chat messages.",
+    "retentionText": "API credentials are stored in the device Keychain and used to authenticate with your chosen service. Switch to on-device processing to stop future transfers. Each provider applies its own retention and deletion policy. Contact that provider to request deletion of material already sent."
+  },
+  "ja": {
+    "title": "録音文字起こしエディタ",
+    "tagline": "録音、会議、インタビュー向けのオフライン文字起こしとテキストベース音声編集。",
+    "features": "主な機能",
+    "privacy": "プライバシーポリシー",
+    "support": "サポート",
+    "intro": "録音文字起こしエディタは、録音、ファイル読み込み、共有拡張からの保存に対応し、文字起こし、話者分離、編集を端末上で行います。",
+    "featureItems": [
+      "オフライン文字起こし：内蔵モデルで一般的な録音を処理。",
+      "話者分離：会議、インタビュー、ポッドキャストを整理。",
+      "テキストベース編集：文字起こしから音声位置を確認。",
+      "文字起こしから議事録やタスクをまとめたり、選んだ録音について質問したりできます。",
+      "書き出し：原稿、字幕、編集済み音声を作成。"
+    ],
+    "privacyText": "録音、文字起こし、編集内容は既定で端末に保存されます。録音はライブラリから削除できます。アカウント登録は不要で、広告目的のトラッキングは行いません。マイクは録音、カメラはカバー写真の撮影に使用します。購入とサブスクリプションは Apple が処理します。",
+    "supportText": "問題がある場合は、端末モデル、システムバージョン、Appバージョン、再現手順を添えて連絡してください。",
+    "terms": "利用規約",
+    "language": "言語",
+    "externalText": "外部サービスでの文字起こしを選んでアップロードを承認すると、録音全体がそのサービスに送信されます。Alibaba Cloud Model Studio では、まず有効期間 48 時間の一時ストレージに保存されます。議事録、要約、タスク、翻訳、質問に外部 AI を使う場合、文字起こしの抜粋、質問、直近の会話など、その処理に必要なテキストが送信されます。",
+    "retentionText": "API 認証情報は端末のキーチェーンに保存され、選んだサービスへの認証に使われます。端末内処理に切り替えると以後の送信は停止します。送信済みデータの保存・削除には各サービスのポリシーが適用されます。削除はサービス提供元にご依頼ください。"
+  },
+  "ko": {
+    "title": "녹음 전사 편집기",
+    "tagline": "녹음, 회의, 인터뷰를 위한 오프라인 전사와 텍스트 기반 오디오 편집.",
+    "features": "주요 기능",
+    "privacy": "개인정보 처리방침",
+    "support": "지원",
+    "intro": "녹음 전사 편집기는 녹음, 파일 가져오기, 공유 확장 저장을 지원하며 전사, 화자 분리, 편집을 기기에서 처리합니다.",
+    "featureItems": [
+      "오프라인 전사: 내장 모델로 일반 녹음을 처리합니다.",
+      "화자 분리: 회의, 인터뷰, 팟캐스트를 정리합니다.",
+      "텍스트 기반 편집: 전사 텍스트로 오디오를 찾습니다.",
+      "전사문에서 회의록과 할 일을 정리하거나 선택한 녹음에 관해 질문하세요.",
+      "내보내기: 원고, 자막, 편집 오디오를 준비합니다."
+    ],
+    "privacyText": "녹음, 전사문 및 편집 내용은 기본적으로 기기에 저장됩니다. 녹음 보관함에서 녹음을 삭제할 수 있습니다. 계정이 필요 없으며 광고를 위한 추적을 하지 않습니다. 마이크는 녹음에, 카메라는 표지 사진 촬영에 사용됩니다. 구매 및 구독은 Apple이 처리합니다.",
+    "supportText": "문제가 있으면 기기 모델, 시스템 버전, 앱 버전, 재현 단계를 보내 주세요.",
+    "terms": "이용 약관",
+    "language": "언어",
+    "externalText": "외부 전사를 선택하고 업로드를 승인하면 선택한 제공업체에 전체 녹음이 전송됩니다. Alibaba Cloud Model Studio를 선택하면 유효 기간이 48시간인 임시 저장소에 오디오가 먼저 업로드됩니다. 외부 AI로 회의록, 요약, 할 일, 번역 또는 질문에 대한 답변을 만들 때는 전사문 발췌, 질문, 최근 대화 등 해당 작업에 필요한 텍스트가 전송됩니다.",
+    "retentionText": "API 인증 정보는 기기의 키체인에 저장되며 선택한 서비스에 인증할 때 사용됩니다. 기기 내 처리를 선택하면 이후 전송을 중단할 수 있습니다. 이미 전송한 데이터의 보관 및 삭제에는 각 제공업체의 정책이 적용됩니다. 삭제 요청은 해당 제공업체에 문의하세요."
+  },
+  "de-DE": {
+    "title": "Audio-Transkriptionseditor",
+    "tagline": "Offline-Transkription und textbasierte Audiobearbeitung für Aufnahmen, Meetings und Interviews.",
+    "features": "Funktionen",
+    "privacy": "Datenschutz",
+    "support": "Support",
+    "intro": "Audio-Transkriptionseditor nimmt auf, importiert Dateien und verarbeitet Sprachmemos lokal auf dem Gerät.",
+    "featureItems": [
+      "Offline-Transkription mit integriertem Modell.",
+      "Sprechertrennung für Meetings, Interviews und Podcasts.",
+      "Textbasierte Bearbeitung über den Transkripttext.",
+      "Erstelle aus einem Transkript ein Protokoll mit Aufgaben oder stelle Fragen zu ausgewählten Aufnahmen.",
+      "Export für Transkripte, Untertitel und Audiodateien."
+    ],
+    "privacyText": "Aufnahmen, Transkripte und Bearbeitungen werden standardmäßig auf dem Gerät gespeichert. Aufnahmen lassen sich in der Mediathek löschen. Die App erfordert kein Konto und nutzt kein Werbetracking. Das Mikrofon dient der Aufnahme, die Kamera der Erstellung von Titelbildern. Apple wickelt Käufe und Abonnements ab.",
+    "supportText": "Bitte sende Gerätemodell, Systemversion, App-Version und Reproduktionsschritte.",
+    "terms": "Nutzungsbedingungen",
+    "language": "Sprache",
+    "externalText": "Wenn du die externe Transkription bestätigst, erhält der gewählte Anbieter die vollständige Aufnahme. Alibaba Cloud Model Studio lädt die Audiodatei zunächst in einen 48 Stunden gültigen Zwischenspeicher. Verwendest du externe KI für Protokolle, Zusammenfassungen, Aufgaben, Übersetzungen oder Fragen, erhält der Dienst den dafür benötigten Text, etwa Transkriptauszüge, deine Frage oder die letzten Chatnachrichten.",
+    "retentionText": "API-Zugangsdaten liegen im Schlüsselbund des Geräts und dienen der Anmeldung beim gewählten Dienst. Mit der Verarbeitung auf dem Gerät enden weitere Übertragungen. Für bereits gesendete Daten gelten die Speicher- und Löschfristen des Anbieters. Bitte richte Löschanfragen direkt an ihn."
+  },
+  "fr-FR": {
+    "title": "Éditeur transcription audio",
+    "tagline": "Transcription hors ligne et édition audio par le texte pour enregistrements, réunions et interviews.",
+    "features": "Fonctions",
+    "privacy": "Confidentialité",
+    "support": "Assistance",
+    "intro": "Éditeur transcription audio enregistre, importe des fichiers et traite mémos vocaux, transcriptions et éditions sur l’appareil.",
+    "featureItems": [
+      "Transcription hors ligne avec modèle intégré.",
+      "Séparation des interlocuteurs pour réunions et interviews.",
+      "Édition audio depuis le texte transcrit.",
+      "Transformez une transcription en compte rendu et en liste de tâches, ou posez une question sur les enregistrements sélectionnés.",
+      "Export de transcriptions, sous-titres et audio édité."
+    ],
+    "privacyText": "Les enregistrements, transcriptions et modifications sont conservés par défaut sur votre appareil. Vous pouvez supprimer les enregistrements dans la bibliothèque. Aucun compte requis ni suivi publicitaire. Le micro sert à enregistrer et la caméra à prendre des photos de couverture. Apple gère les achats et les abonnements.",
+    "supportText": "Incluez le modèle de l’appareil, la version du système, la version de l’app et les étapes de reproduction.",
+    "terms": "Conditions d’utilisation",
+    "language": "Langue",
+    "externalText": "Si vous confirmez une transcription externe, le service choisi reçoit la totalité de l’enregistrement. Alibaba Cloud Model Studio place d’abord le fichier audio dans un stockage temporaire valable 48 heures. Si vous utilisez une IA externe pour rédiger un compte rendu, un résumé ou une liste de tâches, traduire ou poser une question, elle reçoit le texte nécessaire, par exemple des extraits de transcription, votre question ou les derniers messages.",
+    "retentionText": "Les identifiants API sont conservés dans le trousseau de l’appareil et servent à vous authentifier auprès du service choisi. Revenez au traitement sur l’appareil pour arrêter les envois. Chaque prestataire applique ses propres règles de conservation et de suppression. Pour effacer des données déjà envoyées, contactez-le directement."
+  },
+  "es-ES": {
+    "title": "Editor de transcripción audio",
+    "tagline": "Transcripción sin conexión y edición de audio por texto para grabaciones, reuniones e entrevistas.",
+    "features": "Funciones",
+    "privacy": "Privacidad",
+    "support": "Soporte",
+    "intro": "Editor de transcripción audio graba, importa archivos y procesa notas de voz, transcripciones y ediciones en el dispositivo.",
+    "featureItems": [
+      "Transcripción sin conexión con modelo integrado.",
+      "Separación de hablantes para reuniones e entrevistas.",
+      "Edición de audio desde el texto transcrito.",
+      "Convierte una transcripción en un acta con tareas pendientes o haz preguntas sobre las grabaciones seleccionadas.",
+      "Exportación de transcripciones, subtítulos y audio editado."
+    ],
+    "privacyText": "Las grabaciones, transcripciones y ediciones se guardan de forma predeterminada en tu dispositivo. Puedes borrar las grabaciones desde la biblioteca. La app no requiere cuenta ni utiliza seguimiento publicitario. El micrófono permite grabar y la cámara sirve para tomar fotos de portada. Apple gestiona las compras y suscripciones.",
+    "supportText": "Incluye modelo del dispositivo, versión del sistema, versión de la app y pasos para reproducir el problema.",
+    "terms": "Términos de uso",
+    "language": "Idioma",
+    "externalText": "Al confirmar una transcripción externa, el proveedor que elijas recibirá la grabación completa. Alibaba Cloud Model Studio sube primero el audio a un almacenamiento temporal con una vigencia de 48 horas. Si usas IA externa para redactar actas, resumir, extraer tareas, traducir o hacer preguntas, el servicio recibirá el texto necesario, como extractos de la transcripción, tu pregunta o mensajes recientes.",
+    "retentionText": "Las credenciales de la API se guardan en el llavero del dispositivo y sirven para autenticarse ante el servicio elegido. Vuelve al procesamiento local para detener futuros envíos. Cada proveedor aplica su propia política de conservación y eliminación. Para borrar datos ya enviados, contacta con ese proveedor."
+  },
+  "es-MX": {
+    "title": "Editor de transcripción audio",
+    "tagline": "Transcripción sin conexión y edición de audio por texto para grabaciones, reuniones e entrevistas.",
+    "features": "Funciones",
+    "privacy": "Privacidad",
+    "support": "Soporte",
+    "intro": "Editor de transcripción audio graba, importa archivos y procesa notas de voz, transcripciones y ediciones en el dispositivo.",
+    "featureItems": [
+      "Transcripción sin conexión con modelo integrado.",
+      "Separación de hablantes para reuniones e entrevistas.",
+      "Edición de audio desde el texto transcrito.",
+      "Convierte una transcripción en un acta con tareas pendientes o haz preguntas sobre las grabaciones seleccionadas.",
+      "Exportación de transcripciones, subtítulos y audio editado."
+    ],
+    "privacyText": "Las grabaciones, transcripciones y ediciones se guardan de forma predeterminada en tu dispositivo. Puedes borrar las grabaciones desde la biblioteca. La app no requiere cuenta ni utiliza seguimiento publicitario. El micrófono permite grabar y la cámara sirve para tomar fotos de portada. Apple gestiona las compras y suscripciones.",
+    "supportText": "Incluye modelo del dispositivo, versión del sistema, versión de la app y pasos para reproducir el problema.",
+    "terms": "Términos de uso",
+    "language": "Idioma",
+    "externalText": "Al confirmar una transcripción externa, el proveedor que elijas recibirá la grabación completa. Alibaba Cloud Model Studio sube primero el audio a un almacenamiento temporal con una vigencia de 48 horas. Si usas IA externa para redactar actas, resumir, extraer tareas, traducir o hacer preguntas, el servicio recibirá el texto necesario, como extractos de la transcripción, tu pregunta o mensajes recientes.",
+    "retentionText": "Las credenciales de la API se guardan en el llavero del dispositivo y sirven para autenticarse ante el servicio elegido. Vuelve al procesamiento local para detener futuros envíos. Cada proveedor aplica su propia política de conservación y eliminación. Para borrar datos ya enviados, contacta con ese proveedor."
+  },
+  "pt-BR": {
+    "title": "Editor de transcrição áudio",
+    "tagline": "Transcrição offline e edição de áudio por texto para gravações, reuniões e entrevistas.",
+    "features": "Recursos",
+    "privacy": "Privacidade",
+    "support": "Suporte",
+    "intro": "Editor de transcrição áudio grava, importa arquivos e processa memorandos de voz, transcrições e edições no dispositivo.",
+    "featureItems": [
+      "Transcrição offline com modelo integrado.",
+      "Separação de falantes para reuniões e entrevistas.",
+      "Edição de áudio pelo texto transcrito.",
+      "Transforme transcrições em atas e tarefas ou faça perguntas sobre as gravações selecionadas.",
+      "Exportação de transcrições, legendas e áudio editado."
+    ],
+    "privacyText": "Gravações, transcrições e edições ficam por padrão no dispositivo. Você pode apagar as gravações na biblioteca. O app dispensa cadastro e não usa rastreamento para publicidade. O microfone permite gravar e a câmera tira fotos de capa. A Apple processa compras e assinaturas.",
+    "supportText": "Inclua modelo do dispositivo, versão do sistema, versão do app e passos de reprodução.",
+    "terms": "Termos de Uso",
+    "language": "Idioma",
+    "externalText": "Ao confirmar uma transcrição externa, o provedor escolhido recebe a gravação completa. O Alibaba Cloud Model Studio envia primeiro o áudio para um armazenamento temporário válido por 48 horas. Ao usar IA externa para atas, resumos, tarefas, traduções ou perguntas, o serviço recebe o texto necessário, que pode incluir trechos da transcrição, sua pergunta ou mensagens recentes.",
+    "retentionText": "As credenciais de API ficam no Chaves do dispositivo e autenticam as solicitações ao serviço escolhido. Volte ao processamento no dispositivo para interromper novos envios. Cada provedor define suas políticas de retenção e exclusão de dados. Entre em contato com o provedor para pedir a exclusão do material já enviado."
+  },
+  "ru": {
+    "title": "Редактор транскрипции аудио",
+    "tagline": "Офлайн-транскрипция и редактирование аудио по тексту для записей, встреч и интервью.",
+    "features": "Возможности",
+    "privacy": "Конфиденциальность",
+    "support": "Поддержка",
+    "intro": "Редактор транскрипции аудио записывает, импортирует файлы и обрабатывает голосовые заметки, расшифровки и правки на устройстве.",
+    "featureItems": [
+      "Офлайн-транскрипция со встроенной моделью.",
+      "Разделение говорящих для встреч и интервью.",
+      "Редактирование аудио по тексту.",
+      "Составляйте протоколы и списки задач по расшифровкам или задавайте вопросы о выбранных записях.",
+      "Экспорт текстов, субтитров и аудио."
+    ],
+    "privacyText": "По умолчанию записи, расшифровки и правки хранятся на устройстве. Записи можно удалить из библиотеки. Регистрация не нужна. Приложение не использует рекламное отслеживание. Микрофон служит для записи, камера — для съёмки обложек. Покупки и подписки обрабатывает Apple.",
+    "supportText": "Укажите модель устройства, версию системы, версию приложения и шаги воспроизведения.",
+    "terms": "Условия использования",
+    "language": "Язык",
+    "externalText": "После подтверждения внешней расшифровки выбранный сервис получает запись целиком. Alibaba Cloud Model Studio сначала загружает аудио во временное хранилище со сроком действия 48 часов. Если вы используете внешний ИИ для протоколов, сводок, задач, перевода или вопросов, сервис получает необходимый текст, например фрагменты расшифровки, ваш вопрос или последние сообщения чата.",
+    "retentionText": "Данные доступа к API хранятся в связке ключей устройства и используются для авторизации в выбранном сервисе. Переключитесь на обработку на устройстве, чтобы прекратить дальнейшую передачу. Поставщик сервиса определяет сроки хранения и правила удаления полученных данных. По поводу удаления уже отправленных материалов обращайтесь к нему."
+  },
+  "it": {
+    "title": "Editor trascrizione audio",
+    "tagline": "Trascrizione offline e modifica audio dal testo per registrazioni, riunioni e interviste.",
+    "features": "Funzioni",
+    "privacy": "Privacy",
+    "support": "Supporto",
+    "intro": "Editor trascrizione audio registra, importa file e gestisce memo vocali, trascrizioni e modifiche sul dispositivo.",
+    "featureItems": [
+      "Trascrizione offline con modello integrato.",
+      "Separazione dei parlanti per riunioni e interviste.",
+      "Modifica audio dal testo trascritto.",
+      "Ricava verbali e attività da una trascrizione o fai domande sulle registrazioni selezionate.",
+      "Esportazione di trascrizioni, sottotitoli e audio."
+    ],
+    "privacyText": "Registrazioni, trascrizioni e modifiche vengono salvate sul dispositivo per impostazione predefinita. Puoi eliminare le registrazioni dalla libreria. L’app non richiede un account e non usa il tracciamento pubblicitario. Il microfono serve a registrare e la fotocamera a scattare foto di copertina. Apple gestisce acquisti e abbonamenti.",
+    "supportText": "Invia modello del dispositivo, versione del sistema, versione dell’app e passaggi per riprodurre il problema.",
+    "terms": "Termini di utilizzo",
+    "language": "Lingua",
+    "externalText": "Se confermi una trascrizione esterna, il servizio scelto riceve l’intera registrazione. Alibaba Cloud Model Studio carica prima l’audio in uno spazio temporaneo valido per 48 ore. Se usi un servizio di IA esterno per verbali, riepiloghi, attività, traduzioni o domande, riceverà il testo necessario, che può includere estratti della trascrizione, la domanda o i messaggi recenti.",
+    "retentionText": "Le credenziali API vengono salvate nel portachiavi del dispositivo e servono per autenticarsi presso il servizio scelto. Torna all’elaborazione sul dispositivo per interrompere gli invii futuri. Ogni fornitore applica le proprie regole di conservazione e cancellazione. Contattalo per chiedere la cancellazione di dati già inviati."
+  },
+  "nl-NL": {
+    "title": "Audio Transcriptie Editor",
+    "tagline": "Offline transcriptie en audio bewerken via tekst voor opnamen, vergaderingen en interviews.",
+    "features": "Functies",
+    "privacy": "Privacybeleid",
+    "support": "Support",
+    "intro": "Audio Transcriptie Editor neemt op, importeert bestanden en verwerkt spraakmemo’s, transcripties en bewerkingen lokaal op het apparaat.",
+    "featureItems": [
+      "Offline transcriptie met ingebouwd model.",
+      "Sprekers scheiden voor vergaderingen en interviews.",
+      "Audio bewerken via transcriptietekst.",
+      "Maak van een transcript notulen en actiepunten, of stel vragen over geselecteerde opnamen.",
+      "Export van transcripties, ondertitels en audio."
+    ],
+    "privacyText": "Opnamen, transcripties en bewerkingen worden standaard op je apparaat bewaard. Je kunt opnamen uit de bibliotheek verwijderen. Er is geen account nodig en de app gebruikt geen advertentietracking. De microfoon neemt geluid op en de camera maakt omslagfoto’s. Apple verwerkt aankopen en abonnementen.",
+    "supportText": "Stuur apparaattype, systeemversie, appversie en stappen om het probleem te reproduceren.",
+    "terms": "Gebruiksvoorwaarden",
+    "language": "Taal",
+    "externalText": "Als je externe transcriptie bevestigt, ontvangt de gekozen aanbieder de volledige opname. Alibaba Cloud Model Studio uploadt de audio eerst naar tijdelijke opslag die 48 uur geldig is. Gebruik je externe AI voor notulen, samenvattingen, actiepunten, vertalingen of vragen, dan ontvangt de dienst de benodigde tekst, zoals transcriptfragmenten, je vraag of recente chatberichten.",
+    "retentionText": "API-inloggegevens staan in de sleutelhanger van het apparaat en dienen voor de aanmelding bij de gekozen dienst. Schakel over op verwerking op het apparaat om verdere verzending te stoppen. Elke aanbieder hanteert een eigen bewaartermijn en verwijderingsbeleid. Neem voor verwijdering van al verzonden materiaal contact op met de aanbieder."
+  },
+  "tr": {
+    "title": "Ses Transkripsiyon Editörü",
+    "tagline": "Kayıtlar, toplantılar ve röportajlar için çevrimdışı transkripsiyon ve metne göre ses düzenleme.",
+    "features": "Özellikler",
+    "privacy": "Gizlilik Politikası",
+    "support": "Destek",
+    "intro": "Ses Transkripsiyon Editörü kayıt yapar, dosya aktarır ve sesli notları, transkripsiyonları ve düzenlemeleri cihazda işler.",
+    "featureItems": [
+      "Yerleşik modelle çevrimdışı transkripsiyon.",
+      "Toplantı ve röportajlar için konuşmacı ayırma.",
+      "Metin üzerinden ses düzenleme.",
+      "Dökümden toplantı tutanağı ve görev listesi hazırlayın veya seçtiğiniz kayıtlar hakkında soru sorun.",
+      "Transkripsiyon, altyazı ve ses dışa aktarma."
+    ],
+    "privacyText": "Kayıtlar, dökümler ve düzenlemeler varsayılan olarak cihazınızda saklanır. Kayıtları arşivden silebilirsiniz. Hesap gerekmez ve uygulama reklam takibi yapmaz. Mikrofon ses kaydı, kamera ise kapak fotoğrafları için kullanılır. Satın alma ve abonelik işlemlerini Apple yürütür.",
+    "supportText": "Cihaz modeli, sistem sürümü, app sürümü ve yeniden üretme adımlarını gönderin.",
+    "terms": "Kullanım Şartları",
+    "language": "Dil",
+    "externalText": "Harici transkripsiyonu onayladığınızda seçtiğiniz sağlayıcı kaydın tamamını alır. Alibaba Cloud Model Studio sesi önce 48 saat geçerli geçici depolama alanına yükler. Tutanak, özet, görev, çeviri veya soru için harici yapay zekâ kullanırsanız seçilen hizmet, dökümden alıntılar, sorunuz veya son sohbet iletileri gibi bu işlem için gereken metni alır.",
+    "retentionText": "API kimlik bilgileri cihazın Anahtar Zinciri’nde saklanır ve seçtiğiniz hizmette kimlik doğrulamak için kullanılır. Yeni aktarımları durdurmak için cihazda işlemeye geri dönün. Her sağlayıcının kendi saklama ve silme politikası geçerlidir. Daha önce gönderilen içeriğin silinmesi için sağlayıcıyla iletişime geçin."
+  },
+  "fr-CA": {
+    "title": "Éditeur transcription audio",
+    "tagline": "Transcription hors ligne et édition audio par le texte pour enregistrements, réunions et interviews.",
+    "features": "Fonctions",
+    "privacy": "Confidentialité",
+    "support": "Assistance",
+    "intro": "Éditeur transcription audio enregistre, importe des fichiers et traite mémos vocaux, transcriptions et éditions sur l’appareil.",
+    "featureItems": [
+      "Transcription hors ligne avec modèle intégré.",
+      "Séparation des interlocuteurs pour réunions et interviews.",
+      "Édition audio depuis le texte transcrit.",
+      "Transformez une transcription en compte rendu et en liste de tâches, ou posez une question sur les enregistrements sélectionnés.",
+      "Export de transcriptions, sous-titres et audio édité."
+    ],
+    "privacyText": "Les enregistrements, transcriptions et modifications sont conservés par défaut sur votre appareil. Vous pouvez supprimer les enregistrements dans la bibliothèque. Aucun compte requis ni suivi publicitaire. Le micro sert à enregistrer et la caméra à prendre des photos de couverture. Apple gère les achats et les abonnements.",
+    "supportText": "Incluez le modèle de l’appareil, la version du système, la version de l’app et les étapes de reproduction.",
+    "terms": "Conditions d’utilisation",
+    "language": "Langue",
+    "externalText": "Si vous confirmez une transcription externe, le service choisi reçoit la totalité de l’enregistrement. Alibaba Cloud Model Studio place d’abord le fichier audio dans un stockage temporaire valable 48 heures. Si vous utilisez une IA externe pour rédiger un compte rendu, un résumé ou une liste de tâches, traduire ou poser une question, elle reçoit le texte nécessaire, par exemple des extraits de transcription, votre question ou les derniers messages.",
+    "retentionText": "Les identifiants API sont conservés dans le trousseau de l’appareil et servent à vous authentifier auprès du service choisi. Revenez au traitement sur l’appareil pour arrêter les envois. Chaque prestataire applique ses propres règles de conservation et de suppression. Pour effacer des données déjà envoyées, contactez-le directement."
+  }
+};
+    const fields = {
+      title: 'title', tagline: 'tagline', navFeatures: 'features', navPrivacy: 'privacy',
+      navSupport: 'support', featuresTitle: 'features', privacyTitle: 'privacy',
+      supportTitle: 'support', intro: 'intro', privacyText: 'privacyText',
+      externalText: 'externalText', retentionText: 'retentionText', supportText: 'supportText',
+      termsLabel: 'terms', languageLabel: 'language'
+    };
+    const languagePicker = document.getElementById('locale');
+
+    function matchingLocale(tag) {
+      if (!tag) return;
+      try {
+        const locale = new Intl.Locale(tag);
+        if (Object.hasOwn(translations, locale.baseName)) return locale.baseName;
+        if (locale.language === 'zh') {
+          return locale.maximize().script === 'Hant' ? 'zh-Hant' : 'zh-Hans';
+        }
+        return Object.keys(translations).find(key => key.split('-')[0] === locale.language);
+      } catch {
+        return;
+      }
     }
-    document.querySelectorAll('[data-set-lang]').forEach(button => button.addEventListener('click', () => setLang(button.dataset.setLang)));
-    setLang(requested);
+    function showLocale(lang) {
+      const copy = translations[lang];
+      document.documentElement.lang = lang;
+      document.title = copy.title;
+      document.querySelector('meta[name="description"]').content = copy.tagline;
+      languagePicker.value = lang;
+      for (const [id, key] of Object.entries(fields)) {
+        document.getElementById(id).textContent = copy[key];
+      }
+      const items = copy.featureItems.map(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        return li;
+      });
+      document.getElementById('featureItems').replaceChildren(...items);
+      document.getElementById('footerText').textContent = '© 2026 Minggang Jiang';
+    }
+    const query = new URLSearchParams(window.location.search);
+    const lang = matchingLocale(query.get('lang'))
+      || navigator.languages.map(matchingLocale).find(Boolean)
+      || 'en-US';
+    showLocale(lang);
+    languagePicker.addEventListener('change', () => {
+      showLocale(languagePicker.value);
+      const url = new URL(window.location.href);
+      url.searchParams.set('lang', languagePicker.value);
+      history.replaceState(null, '', url);
+    });
   </script>
 </body>
 </html>
