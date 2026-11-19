@@ -25,6 +25,11 @@
     h2 { font-size: 30px; margin: 0 0 16px; }
     p, li { font-size: 18px; line-height: 1.65; }
     ul { padding-left: 22px; }
+    #privacy h3 { margin: 1.6em 0 .45em; }
+    #privacy p { max-width: 76ch; }
+    #providers summary { cursor: pointer; font-weight: 600; padding-block: .75em; }
+    .provider-links { columns: 2 14em; }
+    .provider-links li { break-inside: avoid; margin-bottom: .4em; }
     footer { color: #6a6a6a; font-size: 14px; }
   </style>
 </head>
@@ -58,7 +63,48 @@
   </div></div></header>
   <main class="wrap">
     <section id="features"><h2 id="featuresTitle">核心功能</h2><p id="intro">录音转写编辑器支持录音、从“文件”导入音频，以及通过系统分享扩展保存语音备忘录。转写、说话人分离和项目编辑默认在设备本地完成。</p><ul id="featureItems"><li>离线高精度转写：内置高精度转写模型，安装后即可处理常见录音场景。</li><li>说话人分离：自动整理不同说话人，适合会议、访谈和播客素材。</li><li>按文字编辑音频：围绕转写文本定位音频片段，原始文件保持不变。</li><li>从文字稿整理会议纪要和待办，或针对所选录音提问。</li><li>专业导出：整理文字稿、字幕和剪辑后的音频素材。</li></ul></section>
-    <section id="privacy"><h2 id="privacyTitle">隐私政策</h2><p id="privacyText">默认在本机保存录音、文字稿和剪辑项目，可在录音库删除录音。无需注册，App 不使用广告追踪。麦克风用于录音，相机用于拍摄封面。购买与订阅由 Apple 处理。</p><p id="externalText">使用外部转写时，确认上传后，你选择的服务商会收到完整录音。1.0.2 版会将音频直接发送给你选用的阿里云百炼转写模型。使用外部 AI 生成纪要、摘要、事项、翻译或回答问题时，所选接口会收到相关文字，包括任务需要的文字稿片段、问题或近期对话。</p><p id="retentionText">接口凭据保存在本机钥匙串中，用于向所选服务验证身份。切回本机处理即可停止后续传送。服务商收到的数据按其隐私政策保留和删除，如需删除已上传内容，请联系该服务商。</p><p><span id="termsLabel">使用条款</span>: <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Apple Standard EULA</a></p></section>
+    <section id="privacy">
+      <h2 id="privacyTitle">隐私政策</h2>
+      <p id="privacyText">默认在本机保存录音、文字稿和剪辑项目，可在录音库删除录音。无需注册，App 不使用广告追踪。麦克风用于录音，相机用于拍摄封面。购买与订阅由 Apple 处理。</p>
+      <h3 id="accessTitle">录音、文件与个人权限</h3>
+      <p id="accessText">开始录音时，App 使用你授权的麦克风。导入时仅读取你在“文件”或分享菜单中选择的音频；设置封面时使用你拍摄或选取的照片。音频在本机用于播放、剪辑和离线转写。录音库保存文件、修改记录和生成的结果，直到你将其删除。可在系统设置撤回麦克风、相机或语音识别权限。</p>
+      <h3 id="scopeTitle">1.0.2 的可选外部服务</h3>
+      <p id="recipientText">录音或导入本身不会启动外部处理。外部任务使用你在设置中选择的服务和模型。请在发送前核对接收服务及域名；取消即可留在本机。用自己的 API 时，配置地址的运营者会接收请求。中转服务还可能按其路由把内容转发给上游模型服务商。</p>
+      <p id="externalText">使用外部转写时，确认上传后，你选择的服务商会收到完整录音。1.0.2 版会将音频直接发送给你选用的阿里云百炼转写模型。使用外部 AI 生成纪要、摘要、事项、翻译或回答问题时，所选接口会收到相关文字，包括任务需要的文字稿片段、问题或近期对话。</p>
+      <p id="protectionText">开发者要求接收方按本政策提供同等保护，涵盖用途限制、访问安全、保存与删除。下列条款来自预设服务商。实际规则取决于接口、地区、账号方案和设置；自定义服务的规则由其运营者提供。服务条款不允许处理的个人、敏感或机密信息，请选择本机处理。</p>
+      <p id="retentionText">接口凭据保存在本机钥匙串中，用于向所选服务验证身份。切回本机处理即可停止后续传送。服务商收到的数据按其隐私政策保留和删除，如需删除已上传内容，请联系该服务商。</p>
+      <p id="toolsText">读取模型列表会用你的凭据向所选接口查询；转写连接测试使用合成静音。下载本地模型时，下载站点会收到常规网络请求及 IP 地址。通过分享菜单导出时，只有你选中的文件会交给目标应用。清除本机问答历史可在 AI 设置中操作。隐私或删除请求请联系下方支持邮箱。</p>
+      <details id="providers">
+        <summary id="providerTitle">服务商的数据处理政策</summary>
+        <ul class="provider-links">
+          <li><a href="https://developers.openai.com/api/docs/guides/your-data">OpenAI</a></li>
+          <li><a href="https://platform.claude.com/docs/en/manage-claude/api-and-data-retention">Anthropic · Claude</a></li>
+          <li><a href="https://ai.google.dev/gemini-api/terms">Google · Gemini</a></li>
+          <li><a href="https://console.groq.com/docs/your-data">Groq</a></li>
+          <li><a href="https://docs.together.ai/docs/privacy-and-security">Together AI</a></li>
+          <li><a href="https://openrouter.ai/docs/guides/privacy/provider-logging">OpenRouter</a></li>
+          <li><a href="https://docs.x.ai/developers/faq/security">xAI</a></li>
+          <li><a href="https://docs.mistral.ai/admin/monitor-comply/zero-data-retention">Mistral AI</a></li>
+          <li><a href="https://cdn.deepseek.com/policies/zh-CN/deepseek-open-platform-privacy-policy.html">DeepSeek</a></li>
+          <li><a href="https://www.alibabacloud.com/help/en/model-studio/privacy-notice">Alibaba Cloud · Singapore</a></li>
+          <li><a href="https://terms.alicdn.com/legal-agreement/terms/common_platform_service/20230728213935489/20230728213935489.html">阿里云百炼 · 北京</a></li>
+          <li><a href="https://docs.bigmodel.cn/cn/terms/privacy-policy">GLM · 智谱</a></li>
+          <li><a href="https://platform.kimi.com/docs/agreement/userprivacy">Moonshot · Kimi</a></li>
+          <li><a href="https://platform.minimax.cn/protocol/privacy-policy">MiniMax</a></li>
+          <li><a href="https://docs.volcengine.com/docs/ark/volcengine-ark-platform-terms?lang=zh">Volcengine · Ark</a></li>
+          <li><a href="https://docs.volcengine.com/docs/voice-services/voice-service-special-terms?lang=zh">Volcengine · Speech</a></li>
+          <li><a href="https://cloud.baidu.com/doc/Agreements/index.html">Baidu AI Cloud</a></li>
+          <li><a href="https://cloud.tencent.com/document/product/301/97822">Tencent Cloud · Hunyuan</a></li>
+          <li><a href="https://cloud.tencent.com/document/product/301/94121">Tencent Cloud · ASR</a></li>
+          <li><a href="https://platform.stepfun.com/legal/privacy-policy.html">StepFun</a></li>
+          <li><a href="https://www.xfyun.cn/doc/policy/privacy.html">iFLYTEK</a></li>
+          <li><a href="https://platform.baichuan-ai.com/article/privacy-agreement">Baichuan · 百川</a></li>
+          <li><a href="https://modelscope.cn/protocol/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96">ModelScope · 魔搭</a></li>
+          <li><a href="https://docs.siliconflow.cn/docs/legals/privacy-policy">SiliconFlow</a></li>
+        </ul>
+      </details>
+      <p><span id="termsLabel">使用条款</span> · <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Apple Standard EULA</a></p>
+    </section>
     <section id="support"><h2 id="supportTitle">技术支持</h2><p id="supportText">如果遇到导入、录音、转写、购买或导出问题，请附上设备型号、系统版本、App 版本和复现步骤。</p><div class="contact"><span><a href="mailto:onenfiction@gmail.com">onenfiction@gmail.com</a></span><span>小红书：楚游尘</span><span>少数派：楚游尘</span></div></section>
   </main>
   <footer class="wrap"><span id="footerText"></span></footer>
@@ -83,7 +129,14 @@
     "terms": "使用条款",
     "language": "语言",
     "externalText": "使用外部转写时，确认上传后，你选择的服务商会收到完整录音。1.0.2 版会将音频直接发送给你选用的阿里云百炼转写模型。使用外部 AI 生成纪要、摘要、事项、翻译或回答问题时，所选接口会收到相关文字，包括任务需要的文字稿片段、问题或近期对话。",
-    "retentionText": "接口凭据保存在本机钥匙串中，用于向所选服务验证身份。切回本机处理即可停止后续传送。服务商收到的数据按其隐私政策保留和删除，如需删除已上传内容，请联系该服务商。"
+    "retentionText": "接口凭据保存在本机钥匙串中，用于向所选服务验证身份。切回本机处理即可停止后续传送。服务商收到的数据按其隐私政策保留和删除，如需删除已上传内容，请联系该服务商。",
+    "accessTitle": "录音、文件与个人权限",
+    "accessText": "开始录音时，App 使用你授权的麦克风。导入时仅读取你在“文件”或分享菜单中选择的音频；设置封面时使用你拍摄或选取的照片。音频在本机用于播放、剪辑和离线转写。录音库保存文件、修改记录和生成的结果，直到你将其删除。可在系统设置撤回麦克风、相机或语音识别权限。",
+    "scopeTitle": "1.0.2 的可选外部服务",
+    "recipientText": "录音或导入本身不会启动外部处理。外部任务使用你在设置中选择的服务和模型。请在发送前核对接收服务及域名；取消即可留在本机。用自己的 API 时，配置地址的运营者会接收请求。中转服务还可能按其路由把内容转发给上游模型服务商。",
+    "protectionText": "开发者要求接收方按本政策提供同等保护，涵盖用途限制、访问安全、保存与删除。下列条款来自预设服务商。实际规则取决于接口、地区、账号方案和设置；自定义服务的规则由其运营者提供。服务条款不允许处理的个人、敏感或机密信息，请选择本机处理。",
+    "providerTitle": "服务商的数据处理政策",
+    "toolsText": "读取模型列表会用你的凭据向所选接口查询；转写连接测试使用合成静音。下载本地模型时，下载站点会收到常规网络请求及 IP 地址。通过分享菜单导出时，只有你选中的文件会交给目标应用。清除本机问答历史可在 AI 设置中操作。隐私或删除请求请联系下方支持邮箱。"
   },
   "zh-Hant": {
     "title": "錄音轉寫編輯器",
@@ -104,7 +157,14 @@
     "terms": "使用條款",
     "language": "語言",
     "externalText": "使用外部轉寫時，確認上傳後，你選擇的服務商會收到完整錄音。1.0.2 版會將音訊直接傳送給你選用的阿里雲百煉轉寫模型。使用外部 AI 產生會議紀錄、摘要、待辦、翻譯或回答問題時，所選服務會收到所需文字，包括逐字稿節錄、問題或近期對話。",
-    "retentionText": "服務憑證儲存在裝置的鑰匙圈中，用於向所選服務驗證身分。改用裝置端處理即可停止後續傳送。服務商會依其隱私權政策保留及刪除收到的資料。如需刪除已上傳的內容，請聯絡該服務商。"
+    "retentionText": "服務憑證儲存在裝置的鑰匙圈中，用於向所選服務驗證身分。改用裝置端處理即可停止後續傳送。服務商會依其隱私權政策保留及刪除收到的資料。如需刪除已上傳的內容，請聯絡該服務商。",
+    "accessTitle": "錄音、檔案與裝置權限",
+    "accessText": "開始錄音時，App 會使用你授權的麥克風。匯入時只讀取你在「檔案」或分享選單選取的音訊；設定封面時使用你拍攝或選取的照片。音訊可在裝置上播放、剪輯及離線轉寫。檔案、編輯紀錄與產生的結果會保留在資料庫，直到你刪除。可在系統設定撤回麥克風、相機或語音辨識權限。",
+    "scopeTitle": "1.0.2 版的選用外部服務",
+    "recipientText": "錄音或匯入本身不會啟動外部處理。外部工作使用你在設定中選取的服務和模型。傳送前請核對接收服務及網域；取消即可留在裝置上。使用自己的 API 時，所設位址的營運者會收到請求。中介服務亦可能依其路由將內容轉交上游模型服務商。",
+    "protectionText": "開發者要求接收方依本政策提供同等保護，涵蓋用途限制、存取安全、保存及刪除。以下為預設服務商的官方條款。實際規則視介面、地區、帳號方案及設定而定；自訂服務的規則由其營運者提供。如其條款禁止處理個人、敏感或機密資訊，請在裝置上處理。",
+    "providerTitle": "服務商的資料處理政策",
+    "toolsText": "讀取模型清單會以你的憑證向所選服務查詢；轉寫連線測試使用合成靜音。下載本機模型時，下載站台會收到一般網路請求及 IP 位址。透過分享選單匯出時，只有你選取的檔案會傳給目標 App。可在 AI 設定清除本機問答紀錄。隱私或刪除要求請寄至下方支援信箱。"
   },
   "en-US": {
     "title": "Audio Transcription Editor",
@@ -125,7 +185,14 @@
     "terms": "Terms of Use",
     "language": "Language",
     "externalText": "If you confirm external transcription, the provider you choose receives the full recording. Version 1.0.2 sends audio directly to the Alibaba Cloud Model Studio transcription model you select. When you use an external AI service for minutes, summaries, action items, translation or questions, it receives the text needed for that task, which can include transcript excerpts, your question or recent chat messages.",
-    "retentionText": "API credentials are stored in the device Keychain and used to authenticate with your chosen service. Switch to on-device processing to stop future transfers. Each provider applies its own retention and deletion policy. Contact that provider to request deletion of material already sent."
+    "retentionText": "API credentials are stored in the device Keychain and used to authenticate with your chosen service. Switch to on-device processing to stop future transfers. Each provider applies its own retention and deletion policy. Contact that provider to request deletion of material already sent.",
+    "accessTitle": "Recordings, files and device permissions",
+    "accessText": "When you start recording, the app uses the microphone you have authorized. Import reads the audio you select in Files or the share menu. Cover photos come from your camera or photo selection. The app uses audio on your device for playback, editing and offline transcription. Files, edits and generated results remain in the library until you delete them. You can revoke microphone, camera or speech recognition access in system settings.",
+    "scopeTitle": "Optional external services in version 1.0.2",
+    "recipientText": "Recording and importing do not start external processing. External tasks use the service and model you select in settings. Check the recipient and its domain before sending, or cancel to keep the task on your device. If you supply an API endpoint, its operator receives the request. A gateway may also forward content to an upstream model provider according to its routing rules.",
+    "protectionText": "The developer requires recipients to provide the same protection described here for purpose limitation, secure access, retention and deletion. The links below are the preset providers’ own terms. The applicable rules depend on the endpoint, region, account plan and settings. For a custom endpoint, consult its operator. Use on-device processing for personal, sensitive or confidential information that those terms prohibit.",
+    "providerTitle": "Providers’ data practices",
+    "toolsText": "Listing models authenticates a request to the selected service. The transcription connection test uses synthetic silence. Downloading an on-device model sends a network request and your IP address to the download host. Sharing an export passes the file you choose to the destination app. You can clear local chat history in AI settings. For privacy or deletion requests, contact the support email below."
   },
   "en-GB": {
     "title": "Audio Transcription Editor",
@@ -146,7 +213,14 @@
     "terms": "Terms of Use",
     "language": "Language",
     "externalText": "If you confirm external transcription, the provider you choose receives the full recording. Version 1.0.2 sends audio directly to the Alibaba Cloud Model Studio transcription model you select. When you use an external AI service for minutes, summaries, action items, translation or questions, it receives the text needed for that task, which can include transcript excerpts, your question or recent chat messages.",
-    "retentionText": "API credentials are stored in the device Keychain and used to authenticate with your chosen service. Switch to on-device processing to stop future transfers. Each provider applies its own retention and deletion policy. Contact that provider to request deletion of material already sent."
+    "retentionText": "API credentials are stored in the device Keychain and used to authenticate with your chosen service. Switch to on-device processing to stop future transfers. Each provider applies its own retention and deletion policy. Contact that provider to request deletion of material already sent.",
+    "accessTitle": "Recordings, files and device permissions",
+    "accessText": "When you start recording, the app uses the microphone you have authorised. Import reads the audio you select in Files or the share menu. Cover photos come from your camera or photo selection. The app uses audio on your device for playback, editing and offline transcription. Files, edits and generated results remain in the library until you delete them. You can revoke microphone, camera or speech recognition access in system settings.",
+    "scopeTitle": "Optional external services in version 1.0.2",
+    "recipientText": "Recording and importing do not start external processing. External tasks use the service and model you select in settings. Check the recipient and its domain before sending, or cancel to keep the task on your device. If you supply an API endpoint, its operator receives the request. A gateway may also forward content to an upstream model provider according to its routing rules.",
+    "protectionText": "The developer requires recipients to provide the same protection described here for purpose limitation, secure access, retention and deletion. The links below are the preset providers’ own terms. The applicable rules depend on the endpoint, region, account plan and settings. For a custom endpoint, consult its operator. Use on-device processing for personal, sensitive or confidential information that those terms prohibit.",
+    "providerTitle": "Providers’ data practices",
+    "toolsText": "Listing models authenticates a request to the selected service. The transcription connection test uses synthetic silence. Downloading an on-device model sends a network request and your IP address to the download host. Sharing an export passes the file you choose to the destination app. You can clear local chat history in AI settings. For privacy or deletion requests, contact the support email below."
   },
   "en-CA": {
     "title": "Audio Transcription Editor",
@@ -167,7 +241,14 @@
     "terms": "Terms of Use",
     "language": "Language",
     "externalText": "If you confirm external transcription, the provider you choose receives the full recording. Version 1.0.2 sends audio directly to the Alibaba Cloud Model Studio transcription model you select. When you use an external AI service for minutes, summaries, action items, translation or questions, it receives the text needed for that task, which can include transcript excerpts, your question or recent chat messages.",
-    "retentionText": "API credentials are stored in the device Keychain and used to authenticate with your chosen service. Switch to on-device processing to stop future transfers. Each provider applies its own retention and deletion policy. Contact that provider to request deletion of material already sent."
+    "retentionText": "API credentials are stored in the device Keychain and used to authenticate with your chosen service. Switch to on-device processing to stop future transfers. Each provider applies its own retention and deletion policy. Contact that provider to request deletion of material already sent.",
+    "accessTitle": "Recordings, files and device permissions",
+    "accessText": "When you start recording, the app uses the microphone you have authorised. Import reads the audio you select in Files or the share menu. Cover photos come from your camera or photo selection. The app uses audio on your device for playback, editing and offline transcription. Files, edits and generated results remain in the library until you delete them. You can revoke microphone, camera or speech recognition access in system settings.",
+    "scopeTitle": "Optional external services in version 1.0.2",
+    "recipientText": "Recording and importing do not start external processing. External tasks use the service and model you select in settings. Check the recipient and its domain before sending, or cancel to keep the task on your device. If you supply an API endpoint, its operator receives the request. A gateway may also forward content to an upstream model provider according to its routing rules.",
+    "protectionText": "The developer requires recipients to provide the same protection described here for purpose limitation, secure access, retention and deletion. The links below are the preset providers’ own terms. The applicable rules depend on the endpoint, region, account plan and settings. For a custom endpoint, consult its operator. Use on-device processing for personal, sensitive or confidential information that those terms prohibit.",
+    "providerTitle": "Providers’ data practices",
+    "toolsText": "Listing models authenticates a request to the selected service. The transcription connection test uses synthetic silence. Downloading an on-device model sends a network request and your IP address to the download host. Sharing an export passes the file you choose to the destination app. You can clear local chat history in AI settings. For privacy or deletion requests, contact the support email below."
   },
   "en-AU": {
     "title": "Audio Transcription Editor",
@@ -188,7 +269,14 @@
     "terms": "Terms of Use",
     "language": "Language",
     "externalText": "If you confirm external transcription, the provider you choose receives the full recording. Version 1.0.2 sends audio directly to the Alibaba Cloud Model Studio transcription model you select. When you use an external AI service for minutes, summaries, action items, translation or questions, it receives the text needed for that task, which can include transcript excerpts, your question or recent chat messages.",
-    "retentionText": "API credentials are stored in the device Keychain and used to authenticate with your chosen service. Switch to on-device processing to stop future transfers. Each provider applies its own retention and deletion policy. Contact that provider to request deletion of material already sent."
+    "retentionText": "API credentials are stored in the device Keychain and used to authenticate with your chosen service. Switch to on-device processing to stop future transfers. Each provider applies its own retention and deletion policy. Contact that provider to request deletion of material already sent.",
+    "accessTitle": "Recordings, files and device permissions",
+    "accessText": "When you start recording, the app uses the microphone you have authorised. Import reads the audio you select in Files or the share menu. Cover photos come from your camera or photo selection. The app uses audio on your device for playback, editing and offline transcription. Files, edits and generated results remain in the library until you delete them. You can revoke microphone, camera or speech recognition access in system settings.",
+    "scopeTitle": "Optional external services in version 1.0.2",
+    "recipientText": "Recording and importing do not start external processing. External tasks use the service and model you select in settings. Check the recipient and its domain before sending, or cancel to keep the task on your device. If you supply an API endpoint, its operator receives the request. A gateway may also forward content to an upstream model provider according to its routing rules.",
+    "protectionText": "The developer requires recipients to provide the same protection described here for purpose limitation, secure access, retention and deletion. The links below are the preset providers’ own terms. The applicable rules depend on the endpoint, region, account plan and settings. For a custom endpoint, consult its operator. Use on-device processing for personal, sensitive or confidential information that those terms prohibit.",
+    "providerTitle": "Providers’ data practices",
+    "toolsText": "Listing models authenticates a request to the selected service. The transcription connection test uses synthetic silence. Downloading an on-device model sends a network request and your IP address to the download host. Sharing an export passes the file you choose to the destination app. You can clear local chat history in AI settings. For privacy or deletion requests, contact the support email below."
   },
   "ja": {
     "title": "録音文字起こしエディタ",
@@ -209,7 +297,14 @@
     "terms": "利用規約",
     "language": "言語",
     "externalText": "外部サービスでの文字起こしを選んでアップロードを承認すると、録音全体がそのサービスに送信されます。バージョン 1.0.2 では、選択した Alibaba Cloud Model Studio の文字起こしモデルに音声が直接送信されます。議事録、要約、タスク、翻訳、質問に外部 AI を使う場合、文字起こしの抜粋、質問、直近の会話など、その処理に必要なテキストが送信されます。",
-    "retentionText": "API 認証情報は端末のキーチェーンに保存され、選んだサービスへの認証に使われます。端末内処理に切り替えると以後の送信は停止します。送信済みデータの保存・削除には各サービスのポリシーが適用されます。削除はサービス提供元にご依頼ください。"
+    "retentionText": "API 認証情報は端末のキーチェーンに保存され、選んだサービスへの認証に使われます。端末内処理に切り替えると以後の送信は停止します。送信済みデータの保存・削除には各サービスのポリシーが適用されます。削除はサービス提供元にご依頼ください。",
+    "accessTitle": "録音、ファイル、端末の権限",
+    "accessText": "録音を開始すると、許可したマイクを使用します。読み込むのは「ファイル」や共有メニューで選んだ音声です。カバー画像には撮影または選択した写真を使います。端末内で音声を再生、編集し、オフラインで文字起こしできます。ファイル、編集内容、生成結果は削除するまでライブラリに保存されます。マイク、カメラ、音声認識の許可はシステム設定で取り消せます。",
+    "scopeTitle": "バージョン 1.0.2 の外部サービス（任意）",
+    "recipientText": "録音や読み込みだけで外部処理が始まることはありません。外部処理では設定で選んだサービスとモデルを使います。送信前に送信先とドメインを確認してください。キャンセルすると端末内に留まります。独自の API を設定した場合、そのアドレスの運営者がリクエストを受け取ります。中継サービスは経路設定に従い、上流のモデル提供元に内容を転送する場合があります。",
+    "protectionText": "開発者は受信先に対し、利用目的の制限、アクセスの安全性、保存・削除について本ポリシーと同等の保護を求めます。以下はプリセット提供元の公式規約です。適用条件は接続先、地域、契約プラン、アカウント設定によって異なります。独自の接続先では運営者にご確認ください。規約で扱えない個人情報、機微情報、機密情報は端末内で処理してください。",
+    "providerTitle": "サービス提供元のデータ取扱方針",
+    "toolsText": "モデル一覧の取得時には認証情報を使って選択したサービスに問い合わせます。文字起こしの接続テストには合成した無音を使います。端末用モデルのダウンロード先には通常の通信リクエストと IP アドレスが届きます。共有時は選択したファイルが共有先のアプリに渡ります。質問履歴は AI 設定で消去できます。プライバシーや削除のご相談は下記のサポート窓口へご連絡ください。"
   },
   "ko": {
     "title": "녹음 전사 편집기",
@@ -230,7 +325,14 @@
     "terms": "이용 약관",
     "language": "언어",
     "externalText": "외부 전사를 선택하고 업로드를 승인하면 선택한 제공업체에 전체 녹음이 전송됩니다. 1.0.2 버전은 선택한 Alibaba Cloud Model Studio 전사 모델로 오디오를 직접 전송합니다. 외부 AI로 회의록, 요약, 할 일, 번역 또는 질문에 대한 답변을 만들 때는 전사문 발췌, 질문, 최근 대화 등 해당 작업에 필요한 텍스트가 전송됩니다.",
-    "retentionText": "API 인증 정보는 기기의 키체인에 저장되며 선택한 서비스에 인증할 때 사용됩니다. 기기 내 처리를 선택하면 이후 전송을 중단할 수 있습니다. 이미 전송한 데이터의 보관 및 삭제에는 각 제공업체의 정책이 적용됩니다. 삭제 요청은 해당 제공업체에 문의하세요."
+    "retentionText": "API 인증 정보는 기기의 키체인에 저장되며 선택한 서비스에 인증할 때 사용됩니다. 기기 내 처리를 선택하면 이후 전송을 중단할 수 있습니다. 이미 전송한 데이터의 보관 및 삭제에는 각 제공업체의 정책이 적용됩니다. 삭제 요청은 해당 제공업체에 문의하세요.",
+    "accessTitle": "녹음, 파일 및 기기 권한",
+    "accessText": "녹음을 시작하면 앱이 허용된 마이크를 사용합니다. 가져오기에서는 파일 앱이나 공유 메뉴에서 고른 오디오를 읽고, 표지에는 촬영하거나 선택한 사진을 사용합니다. 기기에서 오디오를 재생·편집하고 오프라인으로 전사할 수 있습니다. 파일, 편집 내용 및 생성 결과는 삭제할 때까지 보관함에 남습니다. 마이크, 카메라, 음성 인식 권한은 시스템 설정에서 철회할 수 있습니다.",
+    "scopeTitle": "1.0.2 버전의 선택적 외부 서비스",
+    "recipientText": "녹음하거나 가져오는 것만으로 외부 처리가 시작되지는 않습니다. 외부 작업은 설정에서 선택한 서비스와 모델을 사용합니다. 전송 전에 수신 서비스와 도메인을 확인하세요. 취소하면 데이터가 기기에 남습니다. 직접 API 주소를 지정하면 해당 주소 운영자가 요청을 받습니다. 중계 서비스는 라우팅 규칙에 따라 모델 제공업체에 내용을 전달할 수 있습니다.",
+    "protectionText": "개발자는 수신자에게 목적 제한, 안전한 접근, 보관 및 삭제에 대해 이 정책과 동등한 보호를 요구합니다. 아래는 기본 제공업체의 공식 약관입니다. 실제 적용 조건은 엔드포인트, 지역, 계정 요금제와 설정에 따라 다릅니다. 사용자 지정 서비스의 규칙은 해당 운영자에게 확인하세요. 약관상 허용되지 않는 개인정보, 민감 정보 또는 기밀 정보는 기기에서 처리하세요.",
+    "providerTitle": "서비스 제공업체의 데이터 처리 정책",
+    "toolsText": "모델 목록을 가져올 때 선택한 서비스에 인증 요청을 보냅니다. 전사 연결 테스트에는 합성 무음을 사용합니다. 기기용 모델 다운로드 시 다운로드 서버가 일반 네트워크 요청과 IP 주소를 받습니다. 내보낸 파일을 공유하면 선택한 파일이 대상 앱에 전달됩니다. 기기 내 대화 기록은 AI 설정에서 지울 수 있습니다. 개인정보 또는 삭제 요청은 아래 지원 이메일로 문의하세요."
   },
   "de-DE": {
     "title": "Audio-Transkriptionseditor",
@@ -251,7 +353,14 @@
     "terms": "Nutzungsbedingungen",
     "language": "Sprache",
     "externalText": "Wenn du die externe Transkription bestätigst, erhält der gewählte Anbieter die vollständige Aufnahme. Version 1.0.2 sendet die Aufnahme direkt an das von dir gewählte Transkriptionsmodell von Alibaba Cloud Model Studio. Verwendest du externe KI für Protokolle, Zusammenfassungen, Aufgaben, Übersetzungen oder Fragen, erhält der Dienst den dafür benötigten Text, etwa Transkriptauszüge, deine Frage oder die letzten Chatnachrichten.",
-    "retentionText": "API-Zugangsdaten liegen im Schlüsselbund des Geräts und dienen der Anmeldung beim gewählten Dienst. Mit der Verarbeitung auf dem Gerät enden weitere Übertragungen. Für bereits gesendete Daten gelten die Speicher- und Löschfristen des Anbieters. Bitte richte Löschanfragen direkt an ihn."
+    "retentionText": "API-Zugangsdaten liegen im Schlüsselbund des Geräts und dienen der Anmeldung beim gewählten Dienst. Mit der Verarbeitung auf dem Gerät enden weitere Übertragungen. Für bereits gesendete Daten gelten die Speicher- und Löschfristen des Anbieters. Bitte richte Löschanfragen direkt an ihn.",
+    "accessTitle": "Aufnahmen, Dateien und Geräteberechtigungen",
+    "accessText": "Beim Start einer Aufnahme verwendet die App das freigegebene Mikrofon. Beim Import liest sie das in „Dateien“ oder im Teilen-Menü gewählte Audio. Für Titelbilder nutzt sie aufgenommene oder ausgewählte Fotos. Wiedergabe, Bearbeitung und Offline-Transkription erfolgen auf dem Gerät. Dateien, Änderungen und Ergebnisse bleiben bis zum Löschen in der Mediathek. Mikrofon-, Kamera- und Spracherkennungsrechte kannst du in den Systemeinstellungen widerrufen.",
+    "scopeTitle": "Optionale externe Dienste in Version 1.0.2",
+    "recipientText": "Aufnahme und Import starten keine externe Verarbeitung. Externe Aufgaben verwenden den in den Einstellungen gewählten Dienst und das Modell. Prüfe vor dem Senden Empfänger und Domain oder brich ab, um auf dem Gerät zu bleiben. Bei einer eigenen API-Adresse erhält deren Betreiber die Anfrage. Ein Gateway kann Inhalte nach seinen Routingregeln an einen Modellanbieter weiterleiten.",
+    "protectionText": "Der Entwickler verlangt von Empfängern einen gleichwertigen Schutz bei Zweckbindung, Zugriffssicherheit, Aufbewahrung und Löschung. Unten findest du die offiziellen Bedingungen der voreingestellten Anbieter. Die anwendbaren Regeln hängen von Endpunkt, Region, Tarif und Kontoeinstellungen ab. Frage bei eigenen Endpunkten den Betreiber. Personenbezogene, sensible oder vertrauliche Inhalte, die dort unzulässig sind, solltest du auf dem Gerät verarbeiten.",
+    "providerTitle": "Datenrichtlinien der Anbieter",
+    "toolsText": "Der Modellabruf sendet eine authentifizierte Anfrage an den gewählten Dienst. Der Verbindungstest für Transkription nutzt künstlich erzeugte Stille. Beim Herunterladen eines lokalen Modells erhält der Downloadserver eine Netzwerkanfrage und deine IP-Adresse. Beim Teilen eines Exports erhält die Ziel-App die gewählte Datei. Den lokalen Chatverlauf kannst du in den KI-Einstellungen löschen. Datenschutz- und Löschanfragen kannst du an die unten genannte Supportadresse richten."
   },
   "fr-FR": {
     "title": "Éditeur transcription audio",
@@ -272,7 +381,14 @@
     "terms": "Conditions d’utilisation",
     "language": "Langue",
     "externalText": "Si vous confirmez une transcription externe, le service choisi reçoit la totalité de l’enregistrement. La version 1.0.2 envoie l’audio directement au modèle de transcription Alibaba Cloud Model Studio que vous choisissez. Si vous utilisez une IA externe pour rédiger un compte rendu, un résumé ou une liste de tâches, traduire ou poser une question, elle reçoit le texte nécessaire, par exemple des extraits de transcription, votre question ou les derniers messages.",
-    "retentionText": "Les identifiants API sont conservés dans le trousseau de l’appareil et servent à vous authentifier auprès du service choisi. Revenez au traitement sur l’appareil pour arrêter les envois. Chaque prestataire applique ses propres règles de conservation et de suppression. Pour effacer des données déjà envoyées, contactez-le directement."
+    "retentionText": "Les identifiants API sont conservés dans le trousseau de l’appareil et servent à vous authentifier auprès du service choisi. Revenez au traitement sur l’appareil pour arrêter les envois. Chaque prestataire applique ses propres règles de conservation et de suppression. Pour effacer des données déjà envoyées, contactez-le directement.",
+    "accessTitle": "Enregistrements, fichiers et autorisations",
+    "accessText": "L’app utilise le micro autorisé lorsque vous lancez un enregistrement. À l’importation, elle lit l’audio choisi dans Fichiers ou le menu de partage. Les couvertures proviennent des photos prises ou sélectionnées. L’audio sert à la lecture, au montage et à la transcription hors ligne sur l’appareil. Fichiers, modifications et résultats restent dans la bibliothèque jusqu’à leur suppression. Les autorisations de micro, de caméra et de reconnaissance vocale sont révocables dans les réglages système.",
+    "scopeTitle": "Services externes facultatifs de la version 1.0.2",
+    "recipientText": "Enregistrer ou importer ne déclenche aucun traitement externe. Une tâche externe utilise le service et le modèle choisis dans les réglages. Vérifiez le destinataire et son domaine avant l’envoi, ou annulez pour rester sur l’appareil. Si vous saisissez une adresse API, son exploitant reçoit la requête. Une passerelle peut aussi transmettre le contenu au fournisseur du modèle selon ses règles de routage.",
+    "protectionText": "Le développeur exige des destinataires une protection équivalente à celle de cette politique pour la limitation des finalités, la sécurité des accès, la conservation et l’effacement. Les liens ci-dessous renvoient aux conditions officielles des services prédéfinis. Les règles applicables dépendent du point de connexion, de la région, de l’offre et des réglages du compte. Pour une adresse personnalisée, consultez son exploitant. Traitez sur l’appareil les données personnelles, sensibles ou confidentielles interdites par ces conditions.",
+    "providerTitle": "Pratiques des prestataires en matière de données",
+    "toolsText": "La liste des modèles est obtenue par une requête authentifiée auprès du service choisi. Le test de transcription utilise un silence synthétique. Lors du téléchargement d’un modèle local, le site de téléchargement reçoit une requête réseau et votre adresse IP. Partager un export transmet le fichier choisi à l’app destinataire. L’historique local des échanges peut être effacé dans les réglages d’IA. Pour toute demande sur vos données ou leur effacement, écrivez à l’adresse d’assistance ci-dessous."
   },
   "es-ES": {
     "title": "Editor de transcripción audio",
@@ -293,7 +409,14 @@
     "terms": "Términos de uso",
     "language": "Idioma",
     "externalText": "Al confirmar una transcripción externa, el proveedor que elijas recibirá la grabación completa. La versión 1.0.2 envía el audio directamente al modelo de transcripción de Alibaba Cloud Model Studio que elijas. Si usas IA externa para redactar actas, resumir, extraer tareas, traducir o hacer preguntas, el servicio recibirá el texto necesario, como extractos de la transcripción, tu pregunta o mensajes recientes.",
-    "retentionText": "Las credenciales de la API se guardan en el llavero del dispositivo y sirven para autenticarse ante el servicio elegido. Vuelve al procesamiento local para detener futuros envíos. Cada proveedor aplica su propia política de conservación y eliminación. Para borrar datos ya enviados, contacta con ese proveedor."
+    "retentionText": "Las credenciales de la API se guardan en el llavero del dispositivo y sirven para autenticarse ante el servicio elegido. Vuelve al procesamiento local para detener futuros envíos. Cada proveedor aplica su propia política de conservación y eliminación. Para borrar datos ya enviados, contacta con ese proveedor.",
+    "accessTitle": "Grabaciones, archivos y permisos",
+    "accessText": "Al iniciar una grabación, la app usa el micrófono autorizado. Al importar, lee el audio que elijas en Archivos o en el menú para compartir. Las portadas se crean con las fotos que tomes o elijas. El audio sirve para reproducir, editar y transcribir sin conexión en el dispositivo. Los archivos, cambios y resultados permanecen en la biblioteca hasta que los borres. Puedes retirar los permisos de micrófono, cámara y reconocimiento de voz en los ajustes del sistema.",
+    "scopeTitle": "Servicios externos opcionales de la versión 1.0.2",
+    "recipientText": "Grabar o importar no inicia ningún proceso externo. Las tareas externas utilizan el servicio y el modelo que elijas en los ajustes. Antes de enviar, comprueba el destinatario y su dominio o cancela para continuar en el dispositivo. Si introduces una dirección API, su operador recibe la solicitud. Una pasarela puede reenviar el contenido a un proveedor de modelos según sus reglas de enrutamiento.",
+    "protectionText": "El desarrollador exige a los destinatarios una protección equivalente a la de esta política para limitar la finalidad, proteger el acceso y regular la conservación y la eliminación. Los enlaces siguientes llevan a las condiciones de los servicios predefinidos. Las reglas dependen de la dirección, la región, el plan y los ajustes de la cuenta. Para un servicio personalizado, consulta a su operador. Procesa en el dispositivo los datos personales, sensibles o confidenciales que no permitan esas condiciones.",
+    "providerTitle": "Políticas de datos de los proveedores",
+    "toolsText": "Al consultar la lista de modelos se envía una solicitud autenticada al servicio elegido. La prueba de transcripción usa silencio sintético. Al descargar un modelo local, el servidor recibe una solicitud de red y tu dirección IP. Al compartir una exportación, la app de destino recibe el archivo elegido. Puedes borrar el historial de chat local en los ajustes de IA. Para consultas de privacidad o solicitudes de eliminación, escribe al correo de soporte que figura abajo."
   },
   "es-MX": {
     "title": "Editor de transcripción audio",
@@ -314,7 +437,14 @@
     "terms": "Términos de uso",
     "language": "Idioma",
     "externalText": "Al confirmar una transcripción externa, el proveedor que elijas recibirá la grabación completa. La versión 1.0.2 envía el audio directamente al modelo de transcripción de Alibaba Cloud Model Studio que elijas. Si usas IA externa para redactar actas, resumir, extraer tareas, traducir o hacer preguntas, el servicio recibirá el texto necesario, como extractos de la transcripción, tu pregunta o mensajes recientes.",
-    "retentionText": "Las credenciales de la API se guardan en el llavero del dispositivo y sirven para autenticarse ante el servicio elegido. Vuelve al procesamiento local para detener futuros envíos. Cada proveedor aplica su propia política de conservación y eliminación. Para borrar datos ya enviados, contacta con ese proveedor."
+    "retentionText": "Las credenciales de la API se guardan en el llavero del dispositivo y sirven para autenticarse ante el servicio elegido. Vuelve al procesamiento local para detener futuros envíos. Cada proveedor aplica su propia política de conservación y eliminación. Para borrar datos ya enviados, contacta con ese proveedor.",
+    "accessTitle": "Grabaciones, archivos y permisos",
+    "accessText": "Al iniciar una grabación, la app usa el micrófono autorizado. Al importar, lee el audio que elijas en Archivos o en el menú para compartir. Las portadas se crean con las fotos que tomes o elijas. El audio sirve para reproducir, editar y transcribir sin conexión en el dispositivo. Los archivos, cambios y resultados permanecen en la biblioteca hasta que los borres. Puedes retirar los permisos de micrófono, cámara y reconocimiento de voz en los ajustes del sistema.",
+    "scopeTitle": "Servicios externos opcionales de la versión 1.0.2",
+    "recipientText": "Grabar o importar no inicia ningún proceso externo. Las tareas externas utilizan el servicio y el modelo que elijas en los ajustes. Antes de enviar, comprueba el destinatario y su dominio o cancela para continuar en el dispositivo. Si introduces una dirección API, su operador recibe la solicitud. Una pasarela puede reenviar el contenido a un proveedor de modelos según sus reglas de enrutamiento.",
+    "protectionText": "El desarrollador exige a los destinatarios una protección equivalente a la de esta política para limitar la finalidad, proteger el acceso y regular la conservación y la eliminación. Los enlaces siguientes llevan a las condiciones de los servicios predefinidos. Las reglas dependen de la dirección, la región, el plan y los ajustes de la cuenta. Para un servicio personalizado, consulta a su operador. Procesa en el dispositivo los datos personales, sensibles o confidenciales que no permitan esas condiciones.",
+    "providerTitle": "Políticas de datos de los proveedores",
+    "toolsText": "Al consultar la lista de modelos se envía una solicitud autenticada al servicio elegido. La prueba de transcripción usa silencio sintético. Al descargar un modelo local, el servidor recibe una solicitud de red y tu dirección IP. Al compartir una exportación, la app de destino recibe el archivo elegido. Puedes borrar el historial de chat local en los ajustes de IA. Para consultas de privacidad o solicitudes de eliminación, escribe al correo de soporte que figura abajo."
   },
   "pt-BR": {
     "title": "Editor de transcrição áudio",
@@ -335,7 +465,14 @@
     "terms": "Termos de Uso",
     "language": "Idioma",
     "externalText": "Ao confirmar uma transcrição externa, o provedor escolhido recebe a gravação completa. A versão 1.0.2 envia o áudio diretamente ao modelo de transcrição do Alibaba Cloud Model Studio que você escolher. Ao usar IA externa para atas, resumos, tarefas, traduções ou perguntas, o serviço recebe o texto necessário, que pode incluir trechos da transcrição, sua pergunta ou mensagens recentes.",
-    "retentionText": "As credenciais de API ficam no Chaves do dispositivo e autenticam as solicitações ao serviço escolhido. Volte ao processamento no dispositivo para interromper novos envios. Cada provedor define suas políticas de retenção e exclusão de dados. Entre em contato com o provedor para pedir a exclusão do material já enviado."
+    "retentionText": "As credenciais de API ficam no Chaves do dispositivo e autenticam as solicitações ao serviço escolhido. Volte ao processamento no dispositivo para interromper novos envios. Cada provedor define suas políticas de retenção e exclusão de dados. Entre em contato com o provedor para pedir a exclusão do material já enviado.",
+    "accessTitle": "Gravações, arquivos e permissões",
+    "accessText": "Ao iniciar uma gravação, o app usa o microfone autorizado. Na importação, lê o áudio escolhido em Arquivos ou no menu de compartilhamento. As capas usam fotos tiradas ou selecionadas por você. O áudio serve para reprodução, edição e transcrição offline no dispositivo. Arquivos, edições e resultados permanecem na biblioteca até serem excluídos. As permissões de microfone, câmera e reconhecimento de fala podem ser revogadas nos ajustes do sistema.",
+    "scopeTitle": "Serviços externos opcionais da versão 1.0.2",
+    "recipientText": "Gravar ou importar não inicia o processamento externo. As tarefas externas usam o serviço e o modelo selecionados nos ajustes. Confira o destinatário e o domínio antes de enviar ou cancele para continuar no dispositivo. Se você inserir um endereço de API, o operador desse endereço receberá a solicitação. Um intermediário também poderá encaminhar o conteúdo ao provedor do modelo, conforme suas regras de roteamento.",
+    "protectionText": "O desenvolvedor exige dos destinatários proteção equivalente à descrita nesta política para limitação de finalidade, segurança de acesso, retenção e exclusão. Os links abaixo levam aos termos oficiais dos provedores predefinidos. As regras aplicáveis dependem do endpoint, região, plano e ajustes da conta. Para um endpoint personalizado, consulte o operador. Processe no dispositivo os dados pessoais, sensíveis ou confidenciais que os termos não permitirem.",
+    "providerTitle": "Práticas de dados dos provedores",
+    "toolsText": "A consulta de modelos usa suas credenciais para solicitar a lista ao serviço escolhido. O teste de transcrição usa silêncio sintético. Ao baixar um modelo local, o servidor recebe uma solicitação de rede e seu endereço IP. Ao compartilhar uma exportação, o app de destino recebe o arquivo escolhido. Você pode apagar o histórico de conversas local nos ajustes de IA. Para dúvidas de privacidade ou pedidos de exclusão, escreva ao e-mail de suporte abaixo."
   },
   "ru": {
     "title": "Редактор транскрипции аудио",
@@ -356,7 +493,14 @@
     "terms": "Условия использования",
     "language": "Язык",
     "externalText": "После подтверждения внешней расшифровки выбранный сервис получает запись целиком. В версии 1.0.2 аудио отправляется напрямую в выбранную модель распознавания речи Alibaba Cloud Model Studio. Если вы используете внешний ИИ для протоколов, сводок, задач, перевода или вопросов, сервис получает необходимый текст, например фрагменты расшифровки, ваш вопрос или последние сообщения чата.",
-    "retentionText": "Данные доступа к API хранятся в связке ключей устройства и используются для авторизации в выбранном сервисе. Переключитесь на обработку на устройстве, чтобы прекратить дальнейшую передачу. Поставщик сервиса определяет сроки хранения и правила удаления полученных данных. По поводу удаления уже отправленных материалов обращайтесь к нему."
+    "retentionText": "Данные доступа к API хранятся в связке ключей устройства и используются для авторизации в выбранном сервисе. Переключитесь на обработку на устройстве, чтобы прекратить дальнейшую передачу. Поставщик сервиса определяет сроки хранения и правила удаления полученных данных. По поводу удаления уже отправленных материалов обращайтесь к нему.",
+    "accessTitle": "Записи, файлы и разрешения",
+    "accessText": "Когда вы начинаете запись, приложение использует микрофон с вашего разрешения. При импорте оно читает аудио, выбранное в «Файлах» или меню «Поделиться». Для обложки используется снятое или выбранное фото. Запись можно воспроизводить, редактировать и расшифровывать без сети на устройстве. Файлы, правки и результаты сохраняются в библиотеке до удаления. Доступ к микрофону, камере и распознаванию речи можно отозвать в системных настройках.",
+    "scopeTitle": "Необязательные внешние сервисы в версии 1.0.2",
+    "recipientText": "Запись и импорт сами по себе не запускают внешнюю обработку. Для внешней задачи используются сервис и модель, выбранные в настройках. Проверьте получателя и домен перед отправкой или нажмите «Отмена», чтобы оставить данные на устройстве. Если вы указали собственный адрес API, запрос получит его оператор. Шлюз может переслать материалы поставщику модели по своим правилам маршрутизации.",
+    "protectionText": "Разработчик требует от получателей равноценной защиты, описанной в этой политике, в отношении целей использования, безопасности доступа, хранения и удаления. Ниже приведены официальные условия предустановленных сервисов. Правила зависят от адреса API, региона, тарифа и настроек учётной записи. Для собственного адреса уточните условия у оператора. Если условия запрещают обработку персональных, чувствительных или конфиденциальных сведений, используйте обработку на устройстве.",
+    "providerTitle": "Правила работы с данными у поставщиков",
+    "toolsText": "При запросе списка моделей выбранный сервис получает аутентифицированный запрос. Проверка подключения для расшифровки использует синтетическую тишину. При загрузке локальной модели сервер получает сетевой запрос и ваш IP-адрес. При экспорте через меню «Поделиться» выбранный файл передаётся целевому приложению. Историю вопросов можно очистить в настройках ИИ. Запросы о конфиденциальности и удалении направляйте по указанному ниже адресу поддержки."
   },
   "it": {
     "title": "Editor trascrizione audio",
@@ -377,7 +521,14 @@
     "terms": "Termini di utilizzo",
     "language": "Lingua",
     "externalText": "Se confermi una trascrizione esterna, il servizio scelto riceve l’intera registrazione. La versione 1.0.2 invia l’audio direttamente al modello di trascrizione di Alibaba Cloud Model Studio che scegli. Se usi un servizio di IA esterno per verbali, riepiloghi, attività, traduzioni o domande, riceverà il testo necessario, che può includere estratti della trascrizione, la domanda o i messaggi recenti.",
-    "retentionText": "Le credenziali API vengono salvate nel portachiavi del dispositivo e servono per autenticarsi presso il servizio scelto. Torna all’elaborazione sul dispositivo per interrompere gli invii futuri. Ogni fornitore applica le proprie regole di conservazione e cancellazione. Contattalo per chiedere la cancellazione di dati già inviati."
+    "retentionText": "Le credenziali API vengono salvate nel portachiavi del dispositivo e servono per autenticarsi presso il servizio scelto. Torna all’elaborazione sul dispositivo per interrompere gli invii futuri. Ogni fornitore applica le proprie regole di conservazione e cancellazione. Contattalo per chiedere la cancellazione di dati già inviati.",
+    "accessTitle": "Registrazioni, file e autorizzazioni",
+    "accessText": "Quando avvii una registrazione, l’app usa il microfono autorizzato. Durante l’importazione legge l’audio selezionato in File o nel menu di condivisione. Per le copertine usa le foto scattate o selezionate. L’audio serve per l’ascolto, il montaggio e la trascrizione offline sul dispositivo. File, modifiche e risultati restano nella libreria finché non li elimini. Puoi revocare i permessi di microfono, fotocamera e riconoscimento vocale nelle impostazioni di sistema.",
+    "scopeTitle": "Servizi esterni facoltativi della versione 1.0.2",
+    "recipientText": "La registrazione e l’importazione non avviano elaborazioni esterne. Per un’operazione esterna si utilizzano il servizio e il modello selezionati nelle impostazioni. Verifica il destinatario e il dominio prima di inviare o annulla per mantenere i dati sul dispositivo. Se inserisci un indirizzo API, il gestore riceve la richiesta. Un gateway può inoltrare i contenuti al fornitore del modello secondo le proprie regole di instradamento.",
+    "protectionText": "Lo sviluppatore richiede ai destinatari una tutela equivalente a quella descritta qui per finalità d’uso, sicurezza degli accessi, conservazione e cancellazione. Di seguito trovi le condizioni ufficiali dei servizi predefiniti. Le regole dipendono dall’endpoint, dall’area geografica, dal piano e dalle impostazioni dell’account. Per un endpoint personalizzato, consulta il gestore. Elabora sul dispositivo i dati personali, sensibili o riservati che le condizioni non consentono di inviare.",
+    "providerTitle": "Regole dei fornitori per il trattamento dei dati",
+    "toolsText": "L’elenco dei modelli viene richiesto al servizio scelto usando le tue credenziali. Il test di connessione per la trascrizione usa silenzio sintetico. Quando scarichi un modello locale, il server riceve una richiesta di rete e il tuo indirizzo IP. Se condividi un’esportazione, l’app di destinazione riceve il file scelto. Puoi cancellare la cronologia delle chat locali nelle impostazioni IA. Per richieste relative alla privacy o alla cancellazione, scrivi all’indirizzo di assistenza qui sotto."
   },
   "nl-NL": {
     "title": "Audio Transcriptie Editor",
@@ -398,7 +549,14 @@
     "terms": "Gebruiksvoorwaarden",
     "language": "Taal",
     "externalText": "Als je externe transcriptie bevestigt, ontvangt de gekozen aanbieder de volledige opname. Versie 1.0.2 stuurt de audio rechtstreeks naar het transcriptiemodel van Alibaba Cloud Model Studio dat je kiest. Gebruik je externe AI voor notulen, samenvattingen, actiepunten, vertalingen of vragen, dan ontvangt de dienst de benodigde tekst, zoals transcriptfragmenten, je vraag of recente chatberichten.",
-    "retentionText": "API-inloggegevens staan in de sleutelhanger van het apparaat en dienen voor de aanmelding bij de gekozen dienst. Schakel over op verwerking op het apparaat om verdere verzending te stoppen. Elke aanbieder hanteert een eigen bewaartermijn en verwijderingsbeleid. Neem voor verwijdering van al verzonden materiaal contact op met de aanbieder."
+    "retentionText": "API-inloggegevens staan in de sleutelhanger van het apparaat en dienen voor de aanmelding bij de gekozen dienst. Schakel over op verwerking op het apparaat om verdere verzending te stoppen. Elke aanbieder hanteert een eigen bewaartermijn en verwijderingsbeleid. Neem voor verwijdering van al verzonden materiaal contact op met de aanbieder.",
+    "accessTitle": "Opnamen, bestanden en apparaatmachtigingen",
+    "accessText": "Als je een opname start, gebruikt de app de microfoon waarvoor je toestemming gaf. Bij het importeren leest de app het audiobestand dat je kiest in Bestanden of het deelmenu. Omslagfoto’s komen uit je camera of fotoselectie. De app gebruikt audio voor afspelen, bewerken en offline transcriptie op je apparaat. Bestanden, bewerkingen en resultaten blijven in de bibliotheek tot je ze verwijdert. Je kunt toegang tot microfoon, camera en spraakherkenning intrekken in de systeeminstellingen.",
+    "scopeTitle": "Optionele externe diensten in versie 1.0.2",
+    "recipientText": "Opnemen en importeren starten geen externe verwerking. Externe taken gebruiken de dienst en het model die je in de instellingen kiest. Controleer de ontvanger en de domeinnaam voordat je verstuurt, of annuleer om de gegevens op je apparaat te houden. Bij een eigen API-adres ontvangt de beheerder het verzoek. Een gateway kan inhoud volgens zijn routeringsregels doorsturen naar de modelaanbieder.",
+    "protectionText": "De ontwikkelaar verlangt van ontvangers dezelfde bescherming als in dit beleid voor doelbinding, veilige toegang, bewaring en verwijdering. Hieronder staan de officiële voorwaarden van de vooraf ingestelde diensten. De regels hangen af van het eindpunt, de regio, het abonnement en de accountinstellingen. Raadpleeg voor een eigen eindpunt de beheerder. Verwerk persoonlijke, gevoelige of vertrouwelijke informatie die deze voorwaarden verbieden op je apparaat.",
+    "providerTitle": "Gegevensbeleid van de aanbieders",
+    "toolsText": "Bij het opvragen van de modellenlijst gaat een geauthenticeerd verzoek naar de gekozen dienst. De verbindingstest voor transcriptie gebruikt synthetische stilte. Bij het downloaden van een lokaal model ontvangt de downloadserver een netwerkverzoek en je IP-adres. Als je een export deelt, ontvangt de doel-app het gekozen bestand. Je kunt lokale chatgeschiedenis wissen in de AI-instellingen. Neem voor privacy- of verwijderingsverzoeken contact op via het onderstaande e-mailadres."
   },
   "tr": {
     "title": "Ses Transkripsiyon Editörü",
@@ -419,7 +577,14 @@
     "terms": "Kullanım Şartları",
     "language": "Dil",
     "externalText": "Harici transkripsiyonu onayladığınızda seçtiğiniz sağlayıcı kaydın tamamını alır. Sürüm 1.0.2, sesi doğrudan seçtiğiniz Alibaba Cloud Model Studio transkripsiyon modeline gönderir. Tutanak, özet, görev, çeviri veya soru için harici yapay zekâ kullanırsanız seçilen hizmet, dökümden alıntılar, sorunuz veya son sohbet iletileri gibi bu işlem için gereken metni alır.",
-    "retentionText": "API kimlik bilgileri cihazın Anahtar Zinciri’nde saklanır ve seçtiğiniz hizmette kimlik doğrulamak için kullanılır. Yeni aktarımları durdurmak için cihazda işlemeye geri dönün. Her sağlayıcının kendi saklama ve silme politikası geçerlidir. Daha önce gönderilen içeriğin silinmesi için sağlayıcıyla iletişime geçin."
+    "retentionText": "API kimlik bilgileri cihazın Anahtar Zinciri’nde saklanır ve seçtiğiniz hizmette kimlik doğrulamak için kullanılır. Yeni aktarımları durdurmak için cihazda işlemeye geri dönün. Her sağlayıcının kendi saklama ve silme politikası geçerlidir. Daha önce gönderilen içeriğin silinmesi için sağlayıcıyla iletişime geçin.",
+    "accessTitle": "Kayıtlar, dosyalar ve cihaz izinleri",
+    "accessText": "Kaydı başlattığınızda uygulama izin verdiğiniz mikrofonu kullanır. İçe aktarırken Dosyalar’dan veya paylaş menüsünden seçtiğiniz sesi okur. Kapak için çektiğiniz ya da seçtiğiniz fotoğrafı kullanır. Ses cihazda oynatma, düzenleme ve çevrimdışı transkripsiyon için işlenir. Dosyalar, düzenlemeler ve sonuçlar siz silene kadar arşivde kalır. Mikrofon, kamera veya konuşma tanıma iznini sistem ayarlarından geri alabilirsiniz.",
+    "scopeTitle": "1.0.2 sürümündeki isteğe bağlı harici hizmetler",
+    "recipientText": "Kayıt veya içe aktarma işlemi tek başına harici işlem başlatmaz. Harici görevler ayarlarda seçtiğiniz hizmeti ve modeli kullanır. Göndermeden önce alıcıyı ve alan adını kontrol edin veya veriyi cihazda tutmak için iptal edin. Kendi API adresinizi girerseniz isteği o adresin işletmecisi alır. Bir ağ geçidi içeriği yönlendirme kurallarına göre model sağlayıcısına aktarabilir.",
+    "protectionText": "Geliştirici, amaç sınırlaması, güvenli erişim, saklama ve silme için alıcıların burada belirtilenle eşdeğer koruma sağlamasını şart koşar. Aşağıda önceden tanımlı hizmetlerin resmî koşulları bulunur. Geçerli kurallar uç noktaya, bölgeye, hesap planına ve ayarlarına bağlıdır. Özel uç noktanın koşulları için işletmecisine danışın. Koşulların işlenmesine izin vermediği kişisel, hassas veya gizli bilgileri cihazda işleyin.",
+    "providerTitle": "Sağlayıcıların veri işleme politikaları",
+    "toolsText": "Model listesi alınırken seçtiğiniz hizmete kimlik doğrulamalı bir istek gönderilir. Transkripsiyon bağlantı testi yapay sessizlik kullanır. Yerel model indirildiğinde indirme sunucusu ağ isteğini ve IP adresinizi alır. Dışa aktarılan dosyayı paylaşırken seçtiğiniz dosya hedef uygulamaya verilir. Yerel sohbet geçmişini yapay zekâ ayarlarından silebilirsiniz. Gizlilik veya silme talepleri için aşağıdaki destek adresine yazın."
   },
   "fr-CA": {
     "title": "Éditeur transcription audio",
@@ -440,7 +605,14 @@
     "terms": "Conditions d’utilisation",
     "language": "Langue",
     "externalText": "Si vous confirmez une transcription externe, le service choisi reçoit la totalité de l’enregistrement. La version 1.0.2 envoie l’audio directement au modèle de transcription Alibaba Cloud Model Studio que vous choisissez. Si vous utilisez une IA externe pour rédiger un compte rendu, un résumé ou une liste de tâches, traduire ou poser une question, elle reçoit le texte nécessaire, par exemple des extraits de transcription, votre question ou les derniers messages.",
-    "retentionText": "Les identifiants API sont conservés dans le trousseau de l’appareil et servent à vous authentifier auprès du service choisi. Revenez au traitement sur l’appareil pour arrêter les envois. Chaque prestataire applique ses propres règles de conservation et de suppression. Pour effacer des données déjà envoyées, contactez-le directement."
+    "retentionText": "Les identifiants API sont conservés dans le trousseau de l’appareil et servent à vous authentifier auprès du service choisi. Revenez au traitement sur l’appareil pour arrêter les envois. Chaque prestataire applique ses propres règles de conservation et de suppression. Pour effacer des données déjà envoyées, contactez-le directement.",
+    "accessTitle": "Enregistrements, fichiers et autorisations",
+    "accessText": "L’app utilise le micro autorisé lorsque vous lancez un enregistrement. À l’importation, elle lit l’audio choisi dans Fichiers ou le menu de partage. Les couvertures proviennent des photos prises ou sélectionnées. L’audio sert à la lecture, au montage et à la transcription hors ligne sur l’appareil. Fichiers, modifications et résultats restent dans la bibliothèque jusqu’à leur suppression. Les autorisations de micro, de caméra et de reconnaissance vocale sont révocables dans les réglages système.",
+    "scopeTitle": "Services externes facultatifs de la version 1.0.2",
+    "recipientText": "Enregistrer ou importer ne déclenche aucun traitement externe. Une tâche externe utilise le service et le modèle choisis dans les réglages. Vérifiez le destinataire et son domaine avant l’envoi, ou annulez pour rester sur l’appareil. Si vous saisissez une adresse API, son exploitant reçoit la requête. Une passerelle peut aussi transmettre le contenu au fournisseur du modèle selon ses règles de routage.",
+    "protectionText": "Le développeur exige des destinataires une protection équivalente à celle de cette politique pour la limitation des finalités, la sécurité des accès, la conservation et l’effacement. Les liens ci-dessous renvoient aux conditions officielles des services prédéfinis. Les règles applicables dépendent du point de connexion, de la région, de l’offre et des réglages du compte. Pour une adresse personnalisée, consultez son exploitant. Traitez sur l’appareil les données personnelles, sensibles ou confidentielles interdites par ces conditions.",
+    "providerTitle": "Pratiques des prestataires en matière de données",
+    "toolsText": "La liste des modèles est obtenue par une requête authentifiée auprès du service choisi. Le test de transcription utilise un silence synthétique. Lors du téléchargement d’un modèle local, le site de téléchargement reçoit une requête réseau et votre adresse IP. Partager un export transmet le fichier choisi à l’app destinataire. L’historique local des échanges peut être effacé dans les réglages d’IA. Pour toute demande sur vos données ou leur effacement, écrivez à l’adresse d’assistance ci-dessous."
   }
 };
     const fields = {
@@ -448,7 +620,9 @@
       navSupport: 'support', featuresTitle: 'features', privacyTitle: 'privacy',
       supportTitle: 'support', intro: 'intro', privacyText: 'privacyText',
       externalText: 'externalText', retentionText: 'retentionText', supportText: 'supportText',
-      termsLabel: 'terms', languageLabel: 'language'
+      termsLabel: 'terms', languageLabel: 'language',
+      accessTitle: 'accessTitle', accessText: 'accessText', scopeTitle: 'scopeTitle', recipientText: 'recipientText',
+      protectionText: 'protectionText', providerTitle: 'providerTitle', toolsText: 'toolsText'
     };
     const languagePicker = document.getElementById('locale');
 
